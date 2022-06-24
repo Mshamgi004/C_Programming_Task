@@ -1,0 +1,5 @@
+#define PAYRATE 12.00
+#define TAXRATE_300 .15
+#define TAXRATE_150 .25
+#define TAXRATE_REST .25
+#define OVERTIME 40
