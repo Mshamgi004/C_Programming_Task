@@ -1,8 +1,7 @@
-**************************************************************MY CHATBOT APPLICATION***********************************************************************
+                                                                     MY_CHATBOT APPLICATION
 
 ***********************************************************************************************************************************************************
- TASK: TO CREATE A CHATBOT APPLICATION WHICH WILL COMMUNICATE BETWEEN TWO CLIENTS.
-       BY DOING SO THE SERVER WILL STORE THE CLIENT DETAILS SUCH AS THE NAME, fd's , PORT  & IP ADDRESS IN A clientlist.txt file.
+ TASK: TO CREATE A CHATBOT APPLICATION WHICH WILL COMMUNICATE BETWEEN TWO CLIENTS. BY DOING SO THE SERVER WILL STORE THE CLIENT DETAILS SUCH AS THE NAME,fd's,PORT & IP ADDRESS IN A clientlist.txt file.
 
 ***********************************************************************************************************************************************************
 
