@@ -1,19 +1,33 @@
 #include "server.h"
 
-int main(int argc, int argv[])
+
+int main()
 {	
-	int server_sockfd = setup_server(PORT,BACKLOG);
 	
+	int server_sockfd, new_server_sockfd;
+	char client_name[32];
+	char recv_msg[1024];
+	char send_msg[1024];
+	fd_set readfds;
+	fd_set writefds;
+	fd_set exceptfds;
+	int maxval_fd = 0;
+
+	bzero(&server,sizeof(struct server_data));
+	printf("-------SERVER STARTED!!!------\n");
+	
+	// Socket server function call
+	setup_server(&server_sockfd);
+
+	maxval_fd = server_sockfd;
+	
+	//accept_new_connection(server_sockfd,new_server_sockfd);
 	while(1)
 	{	
-		
-		int client_sockfd = accept_new_connection(server_sockfd);
-		//printf("REached accept");
-				
-		handle_connection(client_sockfd);
-		//printf("Reached handle connection");
-	
-		printf("......Waiting for connection!!!......\n");
+		maxval_fd = server_build_fdsets(server_sockfd, &readfds, &writefds, &exceptfds);
+		server_select(maxval_fd, server_sockfd, &readfds, &writefds);
 	}
+	printf("END OF APPLICATION -> SERVER\n");
+	
 	return 0;
 }
