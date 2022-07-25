@@ -1,42 +1,33 @@
 #include "server.h"
 
-void *handle_connection(int client_sockfd)
-{	
-	int port;
-	int server_sockfd;
-	struct sockaddr_in client_address;
-	char server_name[LENGTH_NAME];
-	char recv_buffer[LENGTH_NAME];
-	char send_buffer[LENGTH_NAME];
-	char server_responce[1024];
-
-	// Naming of the client
-	if(recv(server_sockfd, recv_buffer, LENGTH_NAME,0) == -1)
+void handle_connection(struct sockaddr_in client_address, int new_server_sockfd)
+{
+    char ip[INET_ADDRSTRLEN] = {0};
+    char client_buffer[MAX_BUFFER_SIZE] = {0};
+    char recv_msg[32];
+	
+	//get extra server details
+	recv_from_client(new_server_sockfd, client_buffer);
+    
+   
+	//get the IP and Port client details
+    int port = ntohs(client_address.sin_port);
+    inet_ntop(AF_INET, &(client_address.sin_addr), ip, INET_ADDRSTRLEN);
+    printf("[CLIENT-INFO] : [port = %d , ip = %s]\n",port, ip);
+   
+    if(server.total_client >= NO_OF_CLIENTS) 
 	{
-		printf("No input name given");
-	}
-	else
-	{
-		strcpy(server_name,LENGTH_NAME);
-		printf("%s %d joined in the chat room", server_name, port);
-	}
-	while(1)
-	{
-		bzero(server_responce, 1024);           // Creating a buffer = server_responce
-		recv(client_sockfd,recv_buffer,sizeof(recv_buffer),0);  // Reading client message
-				
-		if(strcmp(server_responce, "Bye\n") == 0)         // strcmp() used to compare the string "Bye"
-		{
-			printf("---SERVER Disconnected from %s:%d\n:", inet_ntoa(client_address.sin_addr),ntohs(client_address.sin_port));
-			break;
-		}
-		else
-		{
-			printf("Message from Client: %s\n", recv_buffer); // Printing the message received from client and sending it to server
-			//printf("Message from Client1: %s\n", server_responce);
-			send(client_sockfd, send_buffer, strlen(send_buffer), 0); // Writing to the client to sent the message		
-			bzero(send_buffer, sizeof(send_buffer));           // Creating a buffer = server_responce
-		}
-		return server_sockfd;
-	}
-}	
+        perror("----No more space for client to connect to the server----\n");
+    }
+	
+	//populate the new client data 
+   	strncpy(server.client_list[server.total_client].client_name,client_buffer,strlen(client_buffer));
+    server.client_list[server.total_client].port = port;
+    strcpy(server.client_list[server.total_client].ip, ip);
+    server.client_list[server.total_client].file_des =  new_server_sockfd;
+    
+    server.total_client++;
+    
+}
+		
+			
