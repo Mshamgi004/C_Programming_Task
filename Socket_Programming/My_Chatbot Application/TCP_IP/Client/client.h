@@ -18,7 +18,7 @@
 #define MAX_NAME_SZE 20
 #define MAX_BUFFER_SIZE 1024
 
-char client_name[MAX_BUFFER_SIZE] = {0};
+char client_name[MAX_BUFFER_SIZE];
 
 int setup_client(int *client_sockfd);
 void client_recv_from_server(int client_socket, char *recv_msg);
