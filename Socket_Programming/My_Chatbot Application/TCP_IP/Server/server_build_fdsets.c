@@ -1,17 +1,19 @@
 #include "server.h"
 
+// Function defination of server_build_fdsets
 int server_build_fdsets(int server_sockfd, fd_set *readfds, fd_set *writefds, fd_set *exceptfds)
 {
-	int maxval_fd = server_sockfd;
+	int maxval_fd = server_sockfd;               // Keeping the value of server_sockfd = maxval_fd
 
-	FD_ZERO(readfds);
-	FD_SET(server_sockfd, readfds);
-	FD_SET(STDIN_FILENO, readfds);
-	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
+	FD_ZERO(readfds);				// Initializing readfds with zero value
+	FD_SET(server_sockfd, readfds);             // Setting the server_sockfd as readfds
+	FD_SET(0, readfds);              		// Setting the readfds to a 0 value so as to capture in readfdsq
+	fcntl(0, F_SETFL, O_NONBLOCK);              // fcntl() used to nonblocking the application from the cmd
 
-	for(int i = 0; i < server.total_client; i++)
+	// Loop use to fill the readfds with all the socket fd's 
+	for(int val_read = 0; val_read < server.total_client; val_read++)     
 	{
-		FD_SET(server.client_list[i].file_des, readfds);
+		FD_SET(server.client_list[val_read].file_des, readfds);
 		maxval_fd++;
 	}
 	return maxval_fd;
