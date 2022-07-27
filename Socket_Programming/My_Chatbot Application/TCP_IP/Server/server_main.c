@@ -1,33 +1,36 @@
 #include "server.h"
 
-
-int main()
-{	
-	
-	int server_sockfd, new_server_sockfd;
-	char client_name[32];
-	char recv_msg[1024];
-	char send_msg[1024];
+int main() 
+{
+	// Declaring the read ,write and except fd's for select()
 	fd_set readfds;
 	fd_set writefds;
 	fd_set exceptfds;
-	int maxval_fd = 0;
-
-	bzero(&server,sizeof(struct server_data));
-	printf("-------SERVER STARTED!!!------\n");
 	
-	// Socket server function call
-	setup_server(&server_sockfd);
-
-	maxval_fd = server_sockfd;
+	int maxval_fd = 0;   // A max sock_fd declared to hold the server_sockfd value
 	
-	//accept_new_connection(server_sockfd,new_server_sockfd);
-	while(1)
-	{	
-		maxval_fd = server_build_fdsets(server_sockfd, &readfds, &writefds, &exceptfds);
-		server_select(maxval_fd, server_sockfd, &readfds, &writefds);
+	memset(&server,0,sizeof(struct server_data));   // Clearing the structure to hold the total clients
+	printf("--------SERVER STARTED--------!!!\n");
+	printf("---------------------------------\n");
+
+	if(setup_server(&server_sockfd) != 0)   // Function call for setting up of server
+	{
+        printf("*****ERROR : Creation socket failed******");
+        exit(0);
+    }
+	else
+	{
+    	maxval_fd = server_sockfd;   // Equalising the max_fd to server_fd
 	}
-	printf("END OF APPLICATION -> SERVER\n");
-	
-	return 0;
+    
+	while(1) 
+    {
+        maxval_fd = server_build_fdsets(server_sockfd, &readfds, &writefds, &exceptfds);   // server_socket will build the fd_sets and will return the maxval_fd 
+        server_select(maxval_fd,server_sockfd, &readfds, &writefds);     // Function call for select()
+    }
+
+    cleanup();
+    printf("Bye From server\n");
+
+    return 0;
 }
