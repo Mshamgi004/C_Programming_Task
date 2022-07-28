@@ -52,4 +52,6 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 int process_recv_data(int socket,char *buffer);
 int find_the_client_index_list(int socket);
 int find_the_client_index_by_name(char *name);
+void client_handle_list(struct client detail);
+void server_delete_client(int socket_fd_delete);
 void cleanup(void);
