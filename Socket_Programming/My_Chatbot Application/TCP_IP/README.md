@@ -6,6 +6,7 @@
 ***********************************************************************************************************************************************************************
 
 
- OBJECTIVE 1: Maintain the connected client details in server's data structure
+ OBJECTIVE 1: Maintain the connected client details in server's data structure and store them in a text file.
  OBJECTIVE 2: Respond to command like LIST and CONNECT 
- OBJECTIVE 3: Communicate btween clients through server by using select() system call.
+ OBJECTIVE 3: Communicate between clients through server by using select() system call.
+ OBJECTIVE 4: Create a promt on server side so as to make it user friendly application for clients.
