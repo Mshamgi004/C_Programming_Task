@@ -16,7 +16,7 @@ int client_send_to_server(int client_socket, char *send_msg)
 	}
 	else
 	{
-		printf("send() passed");
+		Client_decision(client_sockfd, send_buffer);
 	}
 	return write_bytes;
 }
