@@ -1,6 +1,6 @@
 #include "client.h"
 
-int main() 
+int main(int argc, char* argv[]) 
 {
 	int client_sockfd = 0;   // Declaring the client_sockfd
 	int new_socket = 0;   
@@ -11,12 +11,12 @@ int main()
 	fd_set writefds;
 	fd_set exceptfds;
 
-	// // To check the name given from cmd in binary
-	// if(argc > 2) 
-	// {
-    //     printf("****ERROR : Parameters error****");
-    //     exit(0);
-    // }
+	// To check the name given from cmd in binary
+	if(argc > 2) 
+	{
+        printf("****ERROR : Parameters error****");
+        exit(0);
+    }
     
 	// // Copying the string in client_name typed in cmd
     // strcpy(client_name,argv[1]);
