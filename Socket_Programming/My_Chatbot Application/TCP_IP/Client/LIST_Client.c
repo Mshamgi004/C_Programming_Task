@@ -20,8 +20,9 @@ int LIST_clients(char* buffer, char* send_buffer)
 		{
 
 			// Concaneting the buffer value to client name's 
+			printf("List of client details\n");
 			strcat(buffer, server.client_list[val_send].client_name);
-			strcat(buffer, "&");
+			strcat(buffer, "\n");
 		}
 		//server_send_to_client(socket, buffer);   // sending it to client
 		client_send_to_server(socket, buffer);
