@@ -1,10 +1,14 @@
+#include "server.h"
+
+// -------------------------------------Modifying the logic for file operation-------------------------------------//
+
 void client_handle_list(char* client_buffer, char* ip, char* port_number)
 {
+	char *search;
 	int wordExist = 0;
-	char search[MAX_BUFFER_SIZE];
-
+	
 	FILE* fptr;
-	fptr = fopen("CLIENT_INFO.txt", "w");
+	fptr = fopen("CLIENT_INFO.txt", "a+");
 	if (fptr == NULL)
 	{
 		fprintf(stderr, "\nError to open the file\n");
@@ -15,17 +19,37 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 		printf("----FILE OPENED SUCCESSFULLY----\n");
 	}
 
-	//fwrite (&detail, sizeof(struct client), 1, fptr);
-	if (strlen(client_buffer) > 0)
+	strcpy(search, client_buffer);
+	fprintf(fptr, "Name: %s\n", client_buffer);
+	strcpy(search, ip);
+	fprintf(fptr, "IP Address: %s\n", ip);
+	strcpy(search, port_number);
+	fprintf(fptr, "Port Number: %s\n", port_number);
+
+	fclose(fptr);
+
+	fptr = fopen("CLIENT_INFO.txt", "r");
+	if(fptr == NULL)
 	{
-		// writing in the file using fputs()
-		fputs(client_buffer, fptr);
-		fputs("\n", fptr);
+		fprintf(stderr,"\nError to open the file\n");
+		exit(1);
 	}
 	else
 	{
-		printf("Not able to print the name\n");
+		printf("File opened for reading\n");
 	}
+
+	// //fwrite (&detail, sizeof(struct client), 1, fptr);
+	// if (strlen(client_buffer) > 0)
+	// {
+	// 	// writing in the file using fputs()
+	// 	fputs(client_buffer, fptr);
+	// 	fputs("\n", fptr);
+	// }
+	// else
+	// {
+	// 	printf("Not able to print the name\n");
+	// }
 
 	// if (strlen(ip) > 0)
 	// {
@@ -47,98 +71,75 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 	// {
 	// 	printf("Not able to print the port no\n");
 	// }
-	fclose(fptr);
 
-	fptr = fopen("CLIENT_INFO.txt", "r");
-	if(fptr == NULL)
-	{
-		fprintf(stderr,"\nError to open the file\n");
-		exit(1);
-	}
-	else
-	{
-		printf("Contents in file are being readed\n");
-	}
+	//----------------------------------------------------------WORKING----------------------------------------------------//
 	
-	/////////////////////////////////////////////BUILDING THE LOGIC : WORKING ///////////////////////////////////////////////
-	//printf("NAME = %s\n", client_buffer);
-	
-	
-	while (fscanf(fptr,"%s", client_buffer) != EOF) 
+ 	while (fgets(client_buffer,MAX_BUFFER_SIZE, fptr) != NULL) 
 	{
-        //printf("NAME = %s\n", client_buffer);
-
-		printf("Comparing the names\n");
-		if(strcmp(client_buffer,search) == 0)
+        printf("NAME = %s\n", client_buffer);
+		//fprintf(fptr, "Name: %s\n", client_buffer);
+		if(strstr(client_buffer,search) != NULL)
 		{
-			// wordExist = 1;
-			// break;
-			printf("Client name stored\n");
+			wordExist = 1;
+			break;
 		}
-		// fclose(fptr);
+		fclose(fptr);
 
-		// if(wordExist == 1)
-		// {	
-		// 	printf("HIUHGES\n");
-		// 	printf("Client name already registered\n");
-		// }
+		if(wordExist == 1)
+		{
+			printf("Client name already regisitered\n");
+		}
 		else
 		{
-			fptr = fopen("CLIENT_INFO.txt", "w");
-			if(fptr == NULL)
-			{
-				fprintf(stderr, "\nError to open the file\n");
-			}
-			else
-			{
-				printf("Name added successfully\n");
-			}
-
-			if (strlen(client_buffer) > 0)
-			{
-				// writing in the file using fputs()
-				fputs(client_buffer, fptr);
-				fputs("\n", fptr);
-			}
-			else
-			{
-				printf("Not able to print the name\n");
-			}
-			printf("NEW CLIENT ADDED\n");
-
+			printf("New data added\n");
+			fptr = fopen("CLIENT_INFO.txt", "a");
+			// strcpy(search, client_buffer);
+			// fprintf(fptr, "Name: %s\n", client_buffer);
 		}
     }
-	// while(fgets(ip,INET_ADDRSTRLEN,fptr) != NULL)
-	// {
-	// 	printf("IP ADDRESS = %s\n", ip);
-	// }
-	// while(fgets(port_number,MAX_BUFFER_SIZE,fptr))
-	// {
-	// 	printf("Comparing the strings\n");
-	// 	if(strstr(port_number,search) != NULL)
-	// 	{
-	// 		wordExist = 1;
-	// 		break;
-	// 	}
-	// 	// fclose(fptr);
+	while(fgets(ip,INET_ADDRSTRLEN,fptr) != NULL)
+	{
+		printf("IP ADDRESS = %s\n", ip);
+		//fprintf(fptr, "IP Address: %s\n", ip);
+		if(strstr(ip,search) != NULL)
+		{
+			wordExist = 1;
+			break;
+		}
+		fclose(fptr);
 
-	// 	if(wordExist == 1)
-	// 	{
-	// 		printf("HIIIIIII");
-	// 		printf("Client port no: already registered\n");
-	// 	}
-	// 	else
-	// 	{
-	// 		fptr = fopen("CLIENT_INFO.txt", "a+");
-	// 		if(fptr == NULL)
-	// 		{
-	// 			fprintf(stderr, "\nError to open the file\n");
-	// 		}
-	// 		else
-	// 		{
-	// 			printf("Port no added successfully\n");
-	// 		}
-	// 	}
-    //}
-	fclose (fptr);
+		if(wordExist == 1)
+		{
+			printf("Client name already regisitered\n");
+		}
+		else
+		{
+			printf("New data added\n");
+			fptr = fopen("CLIENT_INFO.txt", "a");
+			
+		}
+	}
+	while(fgets(port_number,MAX_BUFFER_SIZE,fptr) != NULL)
+	{
+		printf("Port_number = %s\n", port_number);
+		//fprintf(fptr,"Port number: %s\n", port_number);
+		if(strstr(port_number,search) != NULL)
+		{
+			wordExist = 1;
+			break;
+		}
+		fclose(fptr);
+
+		if(wordExist == 1)
+		{
+			printf("Client name already regisitered\n");
+		}
+		else
+		{
+			printf("New data added\n");
+			fptr = fopen("CLIENT_INFO.txt", "a");
+		}
+	}
+	
+	//fclose (fptr);
 }
