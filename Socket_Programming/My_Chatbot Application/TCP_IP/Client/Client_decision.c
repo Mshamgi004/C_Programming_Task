@@ -1,3 +1,6 @@
+#include "client.h"
+
+
 int Client_decision(int client_sockfd, char* send_buffer)
 {
 	char choice;
