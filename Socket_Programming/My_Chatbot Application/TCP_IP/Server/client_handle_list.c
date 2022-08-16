@@ -2,6 +2,7 @@
 
 // -------------------------------------Modifying the logic for file operation-------------------------------------//
 
+/*
 void client_handle_list(char* client_buffer, char* ip, char* port_number)
 {
 	char *search;
@@ -142,4 +143,89 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 	}
 	
 	//fclose (fptr);
+}
+*/
+//--------------------------------------------------------------WORKING ON THE FILE OPERATION PART-------------------------------------------------//
+void client_handle_list(char* client_buffer, char* ip, char* port_number)
+{
+	struct client detail;
+
+	char *search = malloc(1000);
+
+	FILE* fptr;
+	fptr = fopen("CLIENT_INFO.txt", "a+");
+	if (fptr == NULL)
+	{
+		fprintf(stderr, "\nError to open the file\n");
+		exit(1);
+	}
+	else
+	{
+		printf("----FILE OPENED SUCCESSFULLY----\n");
+	}
+
+	strcpy(search, client_buffer);
+	fprintf(fptr, "Name: %s\n", client_buffer);
+	strcpy(search, ip);
+	fprintf(fptr, "IP Address: %s\n", ip);
+	strcpy(search, port_number);
+	fprintf(fptr, "Port Number: %s\n", port_number);
+
+	detail.client_name = get_client_name(client_buffer);
+	if(detail.client_name != 0)
+	{
+		fwrite(&detail, sizeof(client), 1, fptr);
+	}
+	else
+	{
+		printf("New content\n");
+	}
+
+	fclose(fptr);
+
+	fptr = fopen("CLIENT_INFO.txt", "r");
+	if(fptr == NULL)
+	{
+		fprintf(stderr, "Error in reading\n");
+		exit(1);
+	}
+	while(fread(&detail, sizeof(client),1,fptr))
+	{
+		printf("%-10d%-20s%-15s", detail.client_name, detail.ip, detail.port);
+	}
+
+	get_client_name(client_buffer);
+
+}
+
+int get_client_name(char client_name)
+{
+	int nameExist = 0;
+	
+	FILE *fptr;
+	fptr = fopen("CLIENT_INFO.txt", "r");
+	if(fptr == NULL)
+	{
+		fprintf(stderr, "Error in reading the new content\n");
+		exit(1);
+	}
+
+	struct client detail1;
+	while(fread(&detail1, sizeof(client), 1, fptr))
+	{
+		if(detail1.client_name == client_name)
+		{
+			nameExist = 1;
+		}
+	}
+	if(nameExist == 0)
+	{
+		return client_name;
+	}
+	else
+	{
+		return get_client_name(client_name);
+	}
+
+	return 0;
 }
