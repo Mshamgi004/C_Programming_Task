@@ -1,14 +1,14 @@
-# Makefile for Server
+################################################################# Makefile for Server ###################################################################
 
 
 CC = gcc
 OBJ = server
 CFLAGS = -c -Wall
 
-all:	$(OBJ)	
-		$(CC) server_main.c server_socket.c server_select.c server_build_fdsets.c accept_connection.c connection_handler.c recv_from_client.c send_to_client.c process_recv_data.c find_the_client_index_by_name.c find_the_client_index_list.c cleanup.c server_delete_client.c client_handle_list.c  -o server
+all:		
+		$(CC) server_main.c server_socket.c server_select.c server_build_fdsets.c accept_connection.c connection_handler.c server_recv_from_client.c server_send_to_client.c process_recv_data.c find_the_client_index_by_name.c find_the_client_index_list.c cleanup.c server_delete_client.c client_handle_list.c  -o server
 
-$(OBJ) :	server_main.o server_socket.o server_select.o server_build_fdsets.o accept_connection.o connection_handler.o recv_from_client.o send_to_client.o process_recv_data.o find_the_client_index_by_name.o find_the_client_index_list.o cleanup.o server_delete_client.o client_handle_list.o  -o $(OBJ)
+$(OBJ) :	server_main.o server_socket.o server_select.o server_build_fdsets.o accept_connection.o connection_handler.o server_recv_from_client.o server_send_to_client.o process_recv_data.o find_the_client_index_by_name.o find_the_client_index_list.o cleanup.o server_delete_client.o client_handle_list.o  -o $(OBJ)
 
 server_main.o :		server_main.c
 		$(CC)	$(CFLAGS)	server_main.c
@@ -28,11 +28,11 @@ accept_connection.o :		accept_connection.c
 connection_handler.o :		connection_handler.c
 		$(CC)	$(CFLAGS)	connection_handler.c
 
-recv_from_client.o :		recv_from_client.c
-		$(CC)	$(CFLAGS)	recv_from_client.c
+server_recv_from_client.o :		server_recv_from_client.c
+		$(CC)	$(CFLAGS)	server_recv_from_client.c
 
-send_to_client.o :		send_to_client.c
-		$(CC)	$(CFLAGS)	send_to_client.c
+server_send_to_client.o :		server_send_to_client.c
+		$(CC)	$(CFLAGS)	server_send_to_client.c
 
 process_recv_data.o :		process_recv_data.c
 		$(CC)	$(CFLAGS)	process_recv_data.c
