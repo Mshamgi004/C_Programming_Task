@@ -11,6 +11,8 @@
 #include<unistd.h>
 #include<fcntl.h>
 
+#include "Structure_list.h"
+
 //Macros
 #define SERVER_PORT 9000
 #define LISTEN_BACKLOG 5
@@ -19,10 +21,11 @@
 #define MAX_BUFFER_SIZE 1024
 #define CONNECTED "Connected ....."
 
-static int server_sockfd = 0;  // Static global variable of server_sockfd
+//static int server_sockfd = 0;  // Static global variable of server_sockfd
 
 // Structure to hold the name, ip-address, port and file des 
-struct client 
+// Structure to hold the name, ip-address, port and file des 
+struct client_List
 {
 	char client_name[MAX_NAME_SZE];
 	char chatwith[MAX_NAME_SZE];
@@ -30,15 +33,17 @@ struct client
 	int file_des;
 	int port;
 	char ip[INET_ADDRSTRLEN];
+
 };
 
 // Data structure to hold the total no of clients
 struct server_data 
 {
 	int total_client;
-	struct client client_list[NO_OF_CLIENTS];
+	struct client_List client_list[NO_OF_CLIENTS];
 };
 
+struct client_List values;
 struct server_data server;
 
 //Function declarations
@@ -52,6 +57,7 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 int process_recv_data(int socket,char *buffer);
 int find_the_client_index_list(int socket);
 int find_the_client_index_by_name(char *name);
-void client_handle_list(struct client detail);
+void client_handle_list(char* client_buffer, char* ip, char* port_number);
+int get_client_name(char *client_buffer);
 void server_delete_client(int socket_fd_delete);
 void cleanup(void);
