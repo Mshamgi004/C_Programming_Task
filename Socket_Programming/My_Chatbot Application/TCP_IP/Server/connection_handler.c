@@ -13,15 +13,15 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 
     server_recv_from_client(new_server_sockfd, client_buffer); // Function call to recieve the name from client
 
-// Updation on reciveing the name and port number on server without cmd
-    printf("---------------------------------\n");
+    // Updation on reciveing the name and port number on server without cmd
+    printf("_________________________________\n");
     printf("\n[CLIENT NAME] : %s\n", client_buffer);
-    printf("---------------------------------\n");
+    printf("_________________________________\n");
     printf("\n[IP ADDRESS]  : %s\n", ip);
-    printf("---------------------------------\n");
+    printf("_________________________________\n");
     sprintf(port_number, "%d", port);
     printf("\n[Port NUMBER] : %s\n", port_number);
-    printf("---------------------------------\n");
+    printf("_________________________________\n");
 
     printf("Storing client data in CLIENT_INFO.txt\n");
 
