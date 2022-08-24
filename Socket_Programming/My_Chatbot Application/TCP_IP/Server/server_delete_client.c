@@ -12,6 +12,7 @@ void server_delete_client(int socket_fd_delete)
 		// Condition for deleting the client
         if(server.client_list[delete].file_des == socket_fd_delete) 
 		{
+            server.total_client--;
 			printf("-------Socket deleted = [%d]\n",socket_fd_delete);
         }
     }
