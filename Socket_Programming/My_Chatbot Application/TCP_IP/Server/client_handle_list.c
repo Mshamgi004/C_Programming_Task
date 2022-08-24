@@ -148,9 +148,9 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 //--------------------------------------------------------------WORKING ON THE FILE OPERATION PART-------------------------------------------------//
 void client_handle_list(char* client_buffer, char* ip, char* port_number)
 {
-	struct client detail;
+	
 
-	char *search = malloc(1000);
+	//char *search = malloc(1000);
 
 	FILE* fptr;
 	fptr = fopen("CLIENT_INFO.txt", "a+");
@@ -164,17 +164,18 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 		printf("----FILE OPENED SUCCESSFULLY----\n");
 	}
 
-	strcpy(search, client_buffer);
+	//strcpy(search, client_buffer);
 	fprintf(fptr, "Name: %s\n", client_buffer);
-	strcpy(search, ip);
+	//strcpy(search, ip);
 	fprintf(fptr, "IP Address: %s\n", ip);
-	strcpy(search, port_number);
+	//strcpy(search, port_number);
 	fprintf(fptr, "Port Number: %s\n", port_number);
 
-	detail.client_name = get_client_name(client_buffer);
-	if(detail.client_name != 0)
+	//strcpy(values.client_name, client_buffer);
+	//values.client_name = client_buffer;
+	if(values.client_name != 0)
 	{
-		fwrite(&detail, sizeof(client), 1, fptr);
+		fwrite(&values, sizeof(struct client_List), 1, fptr);
 	}
 	else
 	{
@@ -189,17 +190,18 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 		fprintf(stderr, "Error in reading\n");
 		exit(1);
 	}
-	while(fread(&detail, sizeof(client),1,fptr))
+	while(fread(&values, sizeof(struct client_List),1,fptr))
 	{
-		printf("%-10d%-20s%-15s", detail.client_name, detail.ip, detail.port);
+		//printf("%-10d%-20s%-15s", detail.client_name, detail.ip, detail.port);
 	}
 
-	get_client_name(client_buffer);
+	get_client_name(*client_buffer);
 
 }
 
-int get_client_name(char client_name)
+int get_client_name()
 {
+	char *client_buffer;
 	int nameExist = 0;
 	
 	FILE *fptr;
@@ -210,21 +212,20 @@ int get_client_name(char client_name)
 		exit(1);
 	}
 
-	struct client detail1;
-	while(fread(&detail1, sizeof(client), 1, fptr))
+	while(fread(&values, sizeof(struct client_List), 1, fptr))
 	{
-		if(detail1.client_name == client_name)
+		if(values.client_name == client_buffer)
 		{
 			nameExist = 1;
 		}
 	}
 	if(nameExist == 0)
 	{
-		return client_name;
+		return *client_buffer;
 	}
 	else
 	{
-		return get_client_name(client_name);
+		return get_client_name(client_buffer);
 	}
 
 	return 0;
