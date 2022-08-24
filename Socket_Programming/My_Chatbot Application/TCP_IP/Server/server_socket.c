@@ -15,7 +15,7 @@ int setup_server(int *server_sockfd)
 	else
 	{
 		printf("-------Server socket created sucessfully-------\n");
-		printf("-----------------------------------------------\n");
+		printf("_______________________________________________\n");
 	}
 	
 	// Declaring the family, port and address for sockfd
@@ -33,7 +33,7 @@ int setup_server(int *server_sockfd)
 	else
 	{
 		printf("------Socket Binded successfully-----\n");
-		printf("-------------------------------------\n");
+		printf("_____________________________________\n");
 	}
 
 	if(0 != listen(*server_sockfd, LISTEN_BACKLOG))    // Listening the incoming connection
@@ -44,7 +44,7 @@ int setup_server(int *server_sockfd)
 	else
 	{
 		printf("------Server socket is ready to listen------\n");
-		printf("--------------------------------------------\n");
+		printf("____________________________________________\n");
 	}
     return 0;
 
