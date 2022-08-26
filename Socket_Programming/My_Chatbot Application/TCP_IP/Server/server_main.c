@@ -7,11 +7,13 @@ int main()
 	fd_set writefds;
 	fd_set exceptfds;
 	
+	int server_sockfd;   // Server socket declared
+	
 	int maxval_fd = 0;   // A max sock_fd declared to hold the server_sockfd value
 	
 	memset(&server,0,sizeof(struct server_data));   // Clearing the structure to hold the total clients
-	printf("--------SERVER STARTED--------!!!\n");
-	printf("---------------------------------\n");
+	printf("------------------------------SERVER STARTED----------------------------!!!\n");
+	printf("___________________________________________________________________________\n");
 
 	if(setup_server(&server_sockfd) != 0)   // Function call for setting up of server
 	{
