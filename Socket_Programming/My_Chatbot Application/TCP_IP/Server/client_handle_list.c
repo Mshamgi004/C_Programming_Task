@@ -2,7 +2,29 @@
 
 // -------------------------------------Modifying the logic for file operation-------------------------------------//
 
+// Function defination for loading the data onto the file
+void client_handle_list(char *client_buffer, char *ip, char *port_number)
+{
+	struct client *object = malloc(sizeof(struct client));   //Dynamically allocation for storing data in structures
+	// Copying the data on the user side to structure
+	strcpy(object->client_name, client_buffer);   
+	strcpy(object->ip,ip);                        
+	strcpy(object->port, port_number);
+
+	FILE *fptr;
+	fptr = fopen("CLIENT_INFO.txt", "a+");
+	if(fptr == NULL)
+	{
+		fprintf(stderr, "Error in opening the file for reading\n");
+		exit(1);
+	}
+
+	fwrite(object, sizeof(struct client), 1, fptr);  // Writing tot the file 
+
+	fclose(fptr);
+}
 /*
+
 void client_handle_list(char* client_buffer, char* ip, char* port_number)
 {
 	char *search;
@@ -145,15 +167,19 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 	//fclose (fptr);
 }
 */
+/*
 //--------------------------------------------------------------WORKING ON THE FILE OPERATION PART-------------------------------------------------//
-void client_handle_list(char* client_buffer, char* ip, char* port_number)
+void client_handle_list()
 {
 	
-
+	
+	char client_buffer[MAX_BUFFER_SIZE];
+	char ip[INET_ADDRSTRLEN];
+	char port_number[MAX_BUFFER_SIZE];
 	//char *search = malloc(1000);
 
 	FILE* fptr;
-	fptr = fopen("CLIENT_INFO.txt", "a+");
+	fptr = fopen("CLIENT_INFO.txt", "w");
 	if (fptr == NULL)
 	{
 		fprintf(stderr, "\nError to open the file\n");
@@ -164,25 +190,51 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 		printf("----FILE OPENED SUCCESSFULLY----\n");
 	}
 
+
+
+
 	//strcpy(search, client_buffer);
-	fprintf(fptr, "Name: %s\n", client_buffer);
+	fprintf(fptr, "Name: %s", values.client_name);
 	//strcpy(search, ip);
-	fprintf(fptr, "IP Address: %s\n", ip);
+	fprintf(fptr, "IP Address: %s", values.ip);
 	//strcpy(search, port_number);
-	fprintf(fptr, "Port Number: %s\n", port_number);
+	fprintf(fptr, "Port Number: %s", values.port);
 
-	//strcpy(values.client_name, client_buffer);
-	//values.client_name = client_buffer;
-	if(values.client_name != 0)
-	{
-		fwrite(&values, sizeof(struct client_List), 1, fptr);
-	}
-	else
-	{
-		printf("New content\n");
-	}
+	// strcpy(values.client_name, client_buffer);
+	// //values.client_name = client_buffer;
+	// if(values.client_name != 0)
+	// {
+	// 	//fwrite(&values, sizeof(struct client_List), 1, fptr);
+	// 	fprintf(fptr, "Name: %s\n", client_buffer);
+	// }
+	// else
+	// {
+	// 	printf("New content\n");
+	// }
+	// //get_client_name(client_buffer);
 
-	fclose(fptr);
+
+	// strcpy(values.ip, ip);
+	// if(values.ip != 0)
+	// {
+	// 	//fwrite(&values, sizeof(struct client_List), 1, fptr);
+	// 	fprintf(fptr, "IP Address: %s\n", ip);
+	// }
+	// else
+	// {
+	// 	printf("New content\n");
+	// }
+	// //strcpy(values.port, port_number);
+	// if(values.port != 0)
+	// {
+	// 	//fwrite(&values, sizeof(struct client_List), 1, fptr);
+	// 	fprintf(fptr, "Port Number: %s\n", port_number);
+	// }
+	// else
+	// {
+	// 	printf("New content\n");
+	// }
+
 
 	fptr = fopen("CLIENT_INFO.txt", "r");
 	if(fptr == NULL)
@@ -190,43 +242,16 @@ void client_handle_list(char* client_buffer, char* ip, char* port_number)
 		fprintf(stderr, "Error in reading\n");
 		exit(1);
 	}
-	while(fread(&values, sizeof(struct client_List),1,fptr))
+	while(fread(&values, sizeof(struct client),1,fptr))
 	{
 		//printf("%-10d%-20s%-15s", detail.client_name, detail.ip, detail.port);
+		printf("COntenet being readed successfully\n");
 	}
 
-	get_client_name(*client_buffer);
+	//get_client_name(client_buffer);
+
+	fclose(fptr);
 
 }
+*/
 
-int get_client_name()
-{
-	char *client_buffer;
-	int nameExist = 0;
-	
-	FILE *fptr;
-	fptr = fopen("CLIENT_INFO.txt", "r");
-	if(fptr == NULL)
-	{
-		fprintf(stderr, "Error in reading the new content\n");
-		exit(1);
-	}
-
-	while(fread(&values, sizeof(struct client_List), 1, fptr))
-	{
-		if(values.client_name == client_buffer)
-		{
-			nameExist = 1;
-		}
-	}
-	if(nameExist == 0)
-	{
-		return *client_buffer;
-	}
-	else
-	{
-		return get_client_name(client_buffer);
-	}
-
-	return 0;
-}
