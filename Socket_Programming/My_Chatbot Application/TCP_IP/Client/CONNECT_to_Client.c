@@ -1,3 +1,5 @@
+/*
+
 // Function defination to communicate with all clients
 // Working on cmd operatio so as to remove the command line user input and send the message form user input only ....... 
 
@@ -34,3 +36,5 @@ int CONNECT_to_Client(char* buffer, char* chat_c)
 	}
 	return 0;
 }
+
+*/
