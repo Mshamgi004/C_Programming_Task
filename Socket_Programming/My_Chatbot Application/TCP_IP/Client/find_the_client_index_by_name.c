@@ -1,3 +1,4 @@
+/*
 #include "client.h"
 
 //find index of the client data structure from client name
@@ -13,3 +14,4 @@ int find_the_client_index_by_name(char* name)
 	}
 	return index;
 }
+*/
