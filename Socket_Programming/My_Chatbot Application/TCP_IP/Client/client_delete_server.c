@@ -1,3 +1,5 @@
+/*
+
 #include "client.h"
 
 // Function defination to delete the client
@@ -17,3 +19,5 @@ void server_delete_client(int socket_fd_delete)
     }
     close(socket_fd_delete);
 }
+
+*/
