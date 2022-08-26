@@ -11,6 +11,7 @@ int Client_decision(int client_sockfd, char* send_buffer)
 	int client_socket;
 	int socket_fd_delete;
 	
+	printf("--------------------------------CLIENT STARTED-----------------------------------\n");
 	printf("---------------------------------------------------------------------------------\n");
 	printf("\n\
 	1. 	Press 1 to know the other client details\n\
