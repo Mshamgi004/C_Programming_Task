@@ -1,3 +1,5 @@
+/*
+
 #include "client.h"
 
 //  To list all client details
@@ -28,3 +30,5 @@ int LIST_clients(char* buffer, char* send_buffer)
 	}
 	return 0;
 }
+
+*/
