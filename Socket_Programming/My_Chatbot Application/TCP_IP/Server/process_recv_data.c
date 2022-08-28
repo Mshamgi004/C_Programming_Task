@@ -1,6 +1,7 @@
+//*********************************************WORKING ON THIS*****************************************//
+
 #include "server.h"
 
-// ---------------------WORKING--------------------------//
 //processing the received data from clients
 int process_recv_data(int socket, char* buffer)
 {
@@ -37,8 +38,9 @@ int process_recv_data(int socket, char* buffer)
 
 	if (strncmp(buffer, "CONNECT", 7) == 0)     // To connect to another client
 	{
-        printf("I want to talk with %s", buffer);
-		sscanf(buffer, "%*[^:]:%s", chat_c);
+		printf("\t||---------------------------[CLIENT : %d]--------------------------------||\n", client_socket);
+        printf("\t||----------------I want to talk with %s------------------||\n", buffer);
+		sscanf(buffer, "\t%*[^:]:%s", chat_c);
 		strcpy(server.client_list[index_sender].chatwith, chat_c);
 
 		index_receiver = find_the_client_index_by_name(server.client_list[index_sender].chatwith);
@@ -49,9 +51,8 @@ int process_recv_data(int socket, char* buffer)
 
 	if (strlen(server.client_list[index_sender].chatwith) != 0)
 	{
-		snprintf(send_buffer, sizeof(send_buffer), "[%s] : %s", server.client_list[index_sender].client_name, buffer);
-		printf("-----------------------\n");
-		printf("Buffer = %s\n", send_buffer);
+		snprintf(send_buffer, sizeof(send_buffer), "\t[%s] : %s\n", server.client_list[index_sender].client_name, buffer);
+		printf("\t||-------Message of client stored in a buffer so as to send = %s-----||\n", send_buffer);
 
 		server_send_to_client(server.client_list[index_sender].chatwith_fd, send_buffer);
 	}
