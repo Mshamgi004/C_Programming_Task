@@ -1,4 +1,4 @@
-//*********************************************WORKING ON THIS*****************************************//
+//**********************************************WORKING ON THIS*********************************************//
 
 #include "server.h"
 
@@ -38,8 +38,7 @@ int process_recv_data(int socket, char* buffer)
 
 	if (strncmp(buffer, "CONNECT", 7) == 0)     // To connect to another client
 	{
-		printf("\t||---------------------------[CLIENT : %d]--------------------------------||\n", client_socket);
-        printf("\t||----------------I want to talk with %s------------------||\n", buffer);
+        printf("\t||-----------------------I want to talk with %s----------------------||\n", buffer);
 		sscanf(buffer, "\t%*[^:]:%s", chat_c);
 		strcpy(server.client_list[index_sender].chatwith, chat_c);
 
