@@ -1,7 +1,9 @@
 #include "client.h"
 
 int main(int argc, char* argv[])
+//int main()
 {
+	//char get_name[1024];
 	int client_sockfd = 0;   // Declaring the client_sockfd
 	int new_socket = 0;
 	int maxval_fd = 0;    // A max sock_fd declared to hold the server_sockfd value
@@ -11,15 +13,23 @@ int main(int argc, char* argv[])
 	fd_set writefds;
 	fd_set exceptfds;
 
-	// To check the name given from cmd in binary
+	//To check the name given from cmd in binary
 	if (argc > 2)
 	{
 		printf("****ERROR : Parameters error****");
 		exit(0);
 	}
-
+	// printf("Enter your name: \n");
+	// fgets(get_name, 1024, stdin);
+	// printf("Name = %s\n", get_name);
+	// strcpy(client_name, get_name);
+	// printf("Name = %s\n", client_name);
+	//fgets(client_name, MAX_BUFFER_SIZE, stdin);
 	// Copying the string in client_name typed in cmd
 	strcpy(client_name, argv[1]);
+
+	printf("\t||---------------------------CLIENT STARTED-------------------------------||\n");
+	printf("\t||************************************************************************||\n");
 
 	if (client_create_socket(&client_sockfd) != 0) // Function call for setting up of client
 	{
