@@ -1,4 +1,3 @@
-
 //Header files
 #include<stdio.h>
 #include<stdlib.h>
@@ -22,7 +21,7 @@
 #define NO_OF_CLIENTS 10
 #define MAX_BUFFER_SIZE 1024
 #define MAX 10000
-#define CONNECTED "Connected ....."
+#define CONNECTED "Connected to client....."
 
 //static int server_sockfd;  // Static global variable of server_sockfd
 
@@ -35,14 +34,17 @@ struct client
 	int file_des;
 	int port;
 	char ip[INET_ADDRSTRLEN];
-}values;
+};
 
 // Data structure to hold the total no of clients
 struct server_data 
 {
 	int total_client;
 	struct client client_list[NO_OF_CLIENTS];
-}server;
+};
+
+struct server_data server;
+struct client values;
 
 
 
@@ -57,6 +59,9 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 int process_recv_data(int socket, char* buffer);
 int find_the_client_index_list(int socket);
 int find_the_client_index_by_name(char* name);
-void client_handle_list();
+//int server_check_detail(char *cleint_buffer);
+//void display();
+//int get_client_details(char *client_buffer, char *ip, char *port_number);
+int get_client_details(char *client_buffer, char *ip, char *port_numebr);
 void server_delete_client(int client_socket);
 void cleanup(void);
