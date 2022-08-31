@@ -8,7 +8,7 @@ int get_client_details(char *client_buffer, char *ip, char *port_number)
 {
 
 	int nameExist = 0;
-	// FILE *fptr;
+	FILE *fptr;
 
 	// if(fptr = fopen("CLIENT_INFO.txt", "r") 
 	// if(fptr == NULL)
