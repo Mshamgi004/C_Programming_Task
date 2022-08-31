@@ -13,7 +13,7 @@ void server_delete_client(int socket_fd_delete)
 		if (server.client_list[delete].file_des == socket_fd_delete)
 		{
 			server.total_client--;
-			printf("\t------------------Connected client deleted = [%d]----------------------------\n", socket_fd_delete);
+			printf("\t------------------Connected client deleted----------------------------\n");
 		}
 	}
 
