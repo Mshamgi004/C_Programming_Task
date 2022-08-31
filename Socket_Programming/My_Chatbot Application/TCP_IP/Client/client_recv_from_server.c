@@ -13,8 +13,8 @@ int client_recv_from_server(int client_socket, char* recv_msg)
 	}
 	else if (read_bytes == 0)
 	{
-		printf("*****Client Disconnected*****\n");
-		server_delete_client(socket_fd_delete);
+		printf("\t**********************Client Disconnected******************************\n");
+		//server_delete_client(socket_fd_delete);
 		close(client_socket);
 	}
 	else
