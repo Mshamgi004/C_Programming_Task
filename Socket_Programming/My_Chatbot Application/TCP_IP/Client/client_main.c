@@ -1,7 +1,7 @@
 #include "client.h"
 
-int main(int argc, char* argv[])
-//int main()
+//int main(int argc, char* argv[])
+int main()
 {
 	//char get_name[1024];
 	int client_sockfd = 0;   // Declaring the client_sockfd
@@ -13,12 +13,33 @@ int main(int argc, char* argv[])
 	fd_set writefds;
 	fd_set exceptfds;
 
+	printf("Please enter your name: ");                  // Entering the name from client side.
+	fgets(client_name, MAX_BUFFER_SIZE, stdin);          // fgets() used to recieve the name of the client
+	// if(fgets(client_name, MAX_BUFFER_SIZE, stdin) != NULL)
+	// {
+	// 	char *array;
+	// 	int length;
+	// 	int number;
+
+	// 	for(number = 0; number < length; number++)
+	// 	{
+	// 		if(array[number] = '\n')
+	// 		{
+	// 			array[number] = '\0';
+	// 			break;
+	// 		}
+	// 	}
+	// }
+	// if(strlen(client_name < 2 || strlen(client_name) >= MAX_BUFFER_SIZE - 1))
+	// {
+	// 	printf("\nName must be more than one and less than ");
+	// }
 	//To check the name given from cmd in binary
-	if (argc > 2)
-	{
-		printf("****ERROR : Parameters error****");
-		exit(0);
-	}
+	// if (argc > 2)
+	// {
+	// 	printf("****ERROR : Parameters error****");
+	// 	exit(0);
+	// }
 	// printf("Enter your name: \n");
 	// fgets(get_name, 1024, stdin);
 	// printf("Name = %s\n", get_name);
@@ -26,7 +47,7 @@ int main(int argc, char* argv[])
 	// printf("Name = %s\n", client_name);
 	//fgets(client_name, MAX_BUFFER_SIZE, stdin);
 	// Copying the string in client_name typed in cmd
-	strcpy(client_name, argv[1]);
+	//strcpy(client_name, argv[1]);
 
 	printf("\t||---------------------------CLIENT STARTED-------------------------------||\n");
 	printf("\t||************************************************************************||\n");
