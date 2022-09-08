@@ -28,7 +28,7 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 	printf("\t||------------------------------------------------------------------------||\n");
 
 	// client_handle_list(client_buffer, ip, port_number);
-	get_client_details(client_buffer, ip, port_number);
+	//get_client_details(client_buffer, ip, port_number);
 
 
 	printf("\t __________________Storing client data in CLIENT_INFO.txt___________________\n");
@@ -42,10 +42,34 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 
 	//populate the new client data and saving it in client_list
 	strncpy(server.client_list[server.total_client].client_name, client_buffer, strlen(client_buffer));
+	printf("Name = %s\n",server.client_list[server.total_client].client_name);
 	server.client_list[server.total_client].port = port;
 	strcpy(server.client_list[server.total_client].ip, ip);
 	server.client_list[server.total_client].file_des = new_server_sockfd;
 
+	server.total_client++;
+	
+	// File opening for appending all the data in the .txt file
+	FILE *fptr;
+	fptr = fopen("CLIENT_INFO.txt", "a+");
+	if(fptr == NULL)
+	{
+		fprintf(stderr, "Error in opeing the file for reading\n");
+		exit(1);
+	}
+
+	//fwrite(&server, sizeof(struct server_data), 1, fptr);
+	fprintf(fptr, "Name = %s\n",server.client_list[server.total_client].client_name);
+	//printf("Name = %s",server.client_list[server.total_client].client_name);
+
+	fclose(fptr);
+
+
+	// client_handle_list(client_buffer, ip, port_number);
+	get_client_details(client_buffer, ip, port_number);
+	
+	// client_handle_list(client_buffer, ip, port_number);
+	//get_client_details(client_buffer, ip, port_number);
 
 	// 1: First append the data in a file CLIENT_INFO.txt
 
@@ -113,6 +137,6 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 
 	//client_handle_list(client_buffer, ip, port_number);
 
-	server.total_client++;
+	//server.total_client++;
 
 }
