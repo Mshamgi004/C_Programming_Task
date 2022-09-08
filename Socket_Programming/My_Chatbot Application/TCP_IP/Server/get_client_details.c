@@ -1,50 +1,81 @@
 #include "server.h"
 
-
-// Function defination for file operation
 int get_client_details(char *client_buffer, char *ip, char *port_number)
 {
-	int nameExist = 0;            // Variable for checking the name
-	int i_val;                    // Variable for for traversing in for loop
+	int nameExist = 0;
+	int i_val;
+	int j_val;
 	
+	char check;
+	
+	// FILE *fptr;
+	// fptr = fopen("CLIENT_INFO.txt", "a+");
+	// if(fptr == NULL)
+	// {
+	// 	fprintf(stderr, "Error in opening the file for reading\n");
+	// 	exit(1);
+	// }
+	
+	//fprintf(fptr, "Name = %s\n", client_buffer);
+	//strcpy(values.client_name, client_buffer);
+	//printf(" Vlaue = %s", values.client_name);
+	//printf("Nme = %s\n", server.client_list[server.total_client].client_name);
+	// fprintf(fptr, "IP Address = %s\n", ip);
+	// fprintf(fptr, "Port number = %s\n", port_number);
+
+	//fclose(fptr);
 	FILE *fptr;
-	fptr = fopen("CLIENT_INFO.txt", "a+");                 // Appending in the file
+	fptr = fopen("CLIENT_INFO.txt","r");
 	if(fptr == NULL)
 	{
 		fprintf(stderr, "Error in opening the file for reading\n");
 		exit(1);
 	}
-	 
-	fprintf(fptr, "%s\n", client_buffer);            // Writing the contents in the file
-	
-	fclose(fptr);     // Closing the file
 
-	fptr = fopen("CLIENT_INFO.txt","r");        // Opening the file for reading
-	if(fptr == NULL)
+	//while(fscanf(fptr, "%s", client_buffer) == 1)
+	while((check = fgetc(fptr)) != EOF)           // Reading till the EOF
 	{
-		fprintf(stderr, "Error in openingthe file for reading\n");
-		exit(1);
-	}
-
-	while(fscanf(fptr, "%s", client_buffer) == 1)          // Name being checked 
-	{
-		for(i_val = 0; i_val < server.total_client; i_val++)              // Moving in the file 
+		if((check == ' ') || (check == '\n'))            // Condition check for reaching the null operator 
 		{
-			if(strcmp(client_buffer,server.client_list[server.total_client].client_name) == 0)       // Comparing the input name to the stored name
+			for(i_val = 0; i_val < server.total_client; i_val++)          // FOr traversing till the loop
 			{
-				nameExist = 1;       // Condition met if string is compared and matches
-				break;
+				if(strcmp(client_buffer,server.client_list[server.total_client].client_name) == 0)   // Comaprison of the strings
+				{
+					nameExist = 1;     // NameExist if the strcmp() returns 0 
+					break;
+				}
+				for(i_val = j_val; i_val >= 0; i_val--)      // Checking for the user name entered
+				{
+					*client_buffer = '\0';
+				}
+				j_val = 0;         
+				continue;
 			}
-			if(nameExist == 1)              // It exists
-			{
-				printf("Name alreaady exists\n");
-			}
-			else
-			{
-				printf("New name to be appended\n");     // New name to be appended
-			}
+			*client_buffer = check;         
+			check++;
 		}
 	}
+
+	if(strcmp(client_buffer,server.client_list[server.total_client].client_name) == 0)    // Name Exist
+	{
+		printf("Name is found\n");
+	}	
+	else if(nameExist == 0)     // Name not found
+	{
+		printf("Name not found and add one\n");
+	}
+
+				// if(nameExist == 1)
+				// {
+				// 	printf("Name alreaady exists\n");
+				// }
+				// else
+				// {
+				// 	printf("New name to be appended\n");
+				// }
+	// 		}
+	// 	}
+	// }
 	fclose(fptr);
 
 	return 0;
