@@ -1,5 +1,7 @@
 #include "server.h"
 
+//***************************************************************WORKING***************************************************************//
+// Function defination for file operation
 int get_client_details(char *client_buffer, char *ip, char *port_number)
 {
 	int nameExist = 0;
@@ -7,6 +9,10 @@ int get_client_details(char *client_buffer, char *ip, char *port_number)
 	int j_val;
 	
 	char check;
+
+	char *file_buffer;
+
+	long lSize;
 	
 	// FILE *fptr;
 	// fptr = fopen("CLIENT_INFO.txt", "a+");
@@ -32,6 +38,41 @@ int get_client_details(char *client_buffer, char *ip, char *port_number)
 		exit(1);
 	}
 
+	fseek(fptr, 0L ,SEEK_END);      // fseek used for setting the fptr to the EOF
+    lSize = ftell(fptr);            // ftell() used for telling the present status of fptr
+    rewind(fptr);                   // rewind() used for setting the fptr to the beginning of the file
+
+    // allocate memory for entire content //
+    file_buffer = calloc(1, lSize + 1);        
+    if(!file_buffer)
+	{
+		fclose(fptr);
+		fputs("memory alloc fails",stderr);
+		exit(1);
+	}
+    
+	// copy the file into the file_buffer //
+    if( 1 != fread(file_buffer, lSize , 1 ,fptr))
+	{
+    	fclose(fptr);
+		free(file_buffer);
+		fputs("entire read fails",stderr);
+		exit(1);
+	}	
+	printf("%s\n", file_buffer);    // Printing the content for validation
+
+    // int results = fputs(copy, fptr);
+    // if(results == 0)
+    // {
+    //     printf("Copy done\n");
+    // }
+    // else
+    // {
+    //     printf("No copy\n");
+    //}
+	//strcpy(server.client_list[server.total_client].client_name, client_buffer);
+	//printf("name = %s\n",server.client_list[server.total_client].client_name);
+
 	//while(fscanf(fptr, "%s", client_buffer) == 1)
 	while((check = fgetc(fptr)) != EOF)           // Reading till the EOF
 	{
@@ -39,29 +80,41 @@ int get_client_details(char *client_buffer, char *ip, char *port_number)
 		{
 			for(i_val = 0; i_val < server.total_client; i_val++)          // FOr traversing till the loop
 			{
-				if(strcmp(client_buffer,server.client_list[server.total_client].client_name) == 0)   // Comaprison of the strings
+				//if(strcmp(client_buffer,server.client_list[server.total_client].client_name) == 0)   // Comaprison of the strings
+				if(strcmp(client_buffer,file_buffer) == 0)
 				{
+					printf("cb1 = %s\n", client_buffer);
+					// printf("cm1 = %s\n", server.client_list[server.total_client].client_name);
+					printf("cb1 = %s\n", file_buffer);
 					nameExist = 1;     // NameExist if the strcmp() returns 0 
 					break;
 				}
-				for(i_val = j_val; i_val >= 0; i_val--)      // Checking for the user name entered
-				{
-					*client_buffer = '\0';
-				}
-				j_val = 0;         
-				continue;
+			// 	for(i_val = j_val; i_val >= 0; i_val--)      // Checking for the user name entered
+			// 	{
+			// 		*client_buffer = '\0';
+			// 	}
+			// 	j_val = 0;         
+			// 	continue;
+			// }
+			// *client_buffer = check;         
+			// check++;
 			}
-			*client_buffer = check;         
-			check++;
 		}
 	}
 
-	if(strcmp(client_buffer,server.client_list[server.total_client].client_name) == 0)    // Name Exist
+	//if(strcmp(client_buffer,server.client_list[server.total_client].client_name) == 0)    // Name Exist
+	if(strcmp(client_buffer, file_buffer) == 0) 
 	{
+		printf("cb2 = %s\n", client_buffer);
+		//printf("cm2 = %s\n", server.client_list[server.total_client].client_name);
+		printf("cb2 = %s\n", file_buffer);
 		printf("Name is found\n");
 	}	
 	else if(nameExist == 0)     // Name not found
 	{
+		printf("cb3 = %s\n", client_buffer);
+		//printf("cm3 = %s\n", server.client_list[server.total_client].client_name);
+		printf("cb3 = %s\n", file_buffer);
 		printf("Name not found and add one\n");
 	}
 
