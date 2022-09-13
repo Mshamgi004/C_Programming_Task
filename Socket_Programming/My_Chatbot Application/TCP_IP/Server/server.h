@@ -34,6 +34,7 @@ struct client
 	int file_des;
 	int port;
 	char ip[INET_ADDRSTRLEN];
+	//char client_password[MAX_BUFFER_SIZE];
 };
 
 // Data structure to hold the total no of clients
@@ -62,6 +63,7 @@ int find_the_client_index_by_name(char* name);
 //int server_check_detail(char *cleint_buffer);
 //void display();
 //int get_client_details(char *client_buffer, char *ip, char *port_number);
-int get_client_details(char *client_buffer, char *ip, char *port_numebr);
+//int get_client_details(char *client_buffer, char *ip, char *port_numebr);
+int get_client_details(char *client_buffer, char *ip, char *port_number,int new_server_sockfd);
 void server_delete_client(int client_socket);
 void cleanup(void);
