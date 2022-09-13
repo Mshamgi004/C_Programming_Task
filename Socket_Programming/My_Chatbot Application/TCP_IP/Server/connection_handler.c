@@ -10,12 +10,14 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 	char client_buffer[MAX_BUFFER_SIZE] = { 0 };   // char buffer to store the name of connected clients
 	int port = ntohs(client_information.sin_port);
 	char port_number[MAX_BUFFER_SIZE];
+
+	char client1_password[MAX_BUFFER_SIZE] = { 0 };
+
+	char file_buffer[10][100];
 	
 	inet_ntop(AF_INET, &(client_information.sin_addr), ip, INET_ADDRSTRLEN);
 	
 	server_recv_from_client(new_server_sockfd, client_buffer);  // Function call to recieve the name from client
-
-	
 
 	printf("\t||--------------Details of the client connected to server-----------------||\n");
 	printf("\t||------------------------------------------------------------------------||\n");
@@ -24,11 +26,16 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 	printf("\t|| [IP ADDRESS]  : %s\n", ip);
 	printf("\t||------------------------------------------------------------------------||\n");
 	sprintf(port_number,"%d",port);
-	printf("\t|| [Port NUMBER] : %s\n",port_number); 
+	printf("\t|| [PORT NUMBER] : %s\n",port_number); 
+	printf("\t||------------------------------------------------------------------------||\n");
+	printf("\t|| [FILE DESCRIPTOR = %d\n", new_server_sockfd);
 	printf("\t||------------------------------------------------------------------------||\n");
 
+
+	//printf("\t|| [PASSWORD]    : %s\n", client1_password);
+
 	// client_handle_list(client_buffer, ip, port_number);
-	//get_client_details(client_buffer, ip, port_number);
+	get_client_details(client_buffer, ip, port_number,new_server_sockfd);
 
 
 	printf("\t __________________Storing client data in CLIENT_INFO.txt___________________\n");
@@ -42,31 +49,60 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 
 	//populate the new client data and saving it in client_list
 	strncpy(server.client_list[server.total_client].client_name, client_buffer, strlen(client_buffer));
-	printf("Name = %s\n",server.client_list[server.total_client].client_name);
+	//printf("Name = %s\n",server.client_list[server.total_client].client_name);
 	server.client_list[server.total_client].port = port;
 	strcpy(server.client_list[server.total_client].ip, ip);
 	server.client_list[server.total_client].file_des = new_server_sockfd;
+	//printf("File des = %d\n",server.client_list[server.total_client].file_des);
 
+	//strncpy(server.client_list[server.total_client].client_password, client1_password, strlen(client1_password));
 	server.total_client++;
-	
-	// File opening for appending all the data in the .txt file
-	FILE *fptr;
-	fptr = fopen("CLIENT_INFO.txt", "a+");
-	if(fptr == NULL)
-	{
-		fprintf(stderr, "Error in opeing the file for reading\n");
-		exit(1);
-	}
+}
+	// FILE *fptr;
+	// fptr = fopen("CLIENT_INFO.txt", "a+");
+	// if(fptr == NULL)
+	// {
+	// 	fprintf(stderr, "Error in opeing the file for reading\n");
+	// 	exit(1);
+	// }
 
-	//fwrite(&server, sizeof(struct server_data), 1, fptr);
-	fprintf(fptr, "Name = %s\n",server.client_list[server.total_client].client_name);
+	// //strcpy(server.client_list[server.total_client].client_name, client_buffer);
+	// //fwrite(&server, sizeof(struct server_data), 1, fptr);
+	//fprintf(fptr, "%s\n",client_buffer);
+	//fprintf(fptr, "IP Address = %s\n", ip);
+	//fprintf(fptr, "Port Number = %s\n", port_number);
 	//printf("Name = %s",server.client_list[server.total_client].client_name);
 
-	fclose(fptr);
+	// int file_results = fputs(file_buffer, fptr);
+
+	// int line = 0;
+
+	// while(!feof(fptr) && !ferror(fptr))
+	// {
+	// 	if(fgets(file_buffer[line], 100, fptr) != NULL)
+	// 	{
+	// 		line++;
+	// 	}
+	// }
+
+	// for(int i = 0; i < line; i++)
+	// {
+	// 	printf("file_buffer = %s\n", file_buffer[i]);
+	// }
+	//fclose(fptr);
+
+	// for(int i = 0; i < line; i++)
+	// {
+	// 	printf("file_buffer = %s\n", file_buffer[i]);
+	// }
+	
+	// printf("file_buff = %s\n", file_buffer);
+
+	//fclose(fptr);
 
 
 	// client_handle_list(client_buffer, ip, port_number);
-	get_client_details(client_buffer, ip, port_number);
+	//get_client_details(client_buffer, ip, port_number);
 	
 	// client_handle_list(client_buffer, ip, port_number);
 	//get_client_details(client_buffer, ip, port_number);
@@ -139,4 +175,3 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 
 	//server.total_client++;
 
-}
