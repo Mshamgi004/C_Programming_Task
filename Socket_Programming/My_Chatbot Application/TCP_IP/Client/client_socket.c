@@ -24,13 +24,13 @@ int client_create_socket(int* client_sockfd)
 	// strcpy(client_name, get_name);
 	// printf("Name = %s\n", client_name);
 
-	setsockopt(*client_sockfd, SOL_SOCKET, (SO_REUSEADDR), &opt_port, sizeof(opt_port));
+	setsockopt(*client_sockfd, SOL_SOCKET, (SO_REUSEADDR | SO_REUSEPORT), &opt_port, sizeof(opt_port));
 
 	// Declaring the family, port and address for sockfd
 	client_address.sin_family = AF_INET;
 	client_address.sin_port = htons(SERVER_PORT);
 	client_address.sin_addr.s_addr = INADDR_ANY;
-
+	//client_address.sin_addr.s_addr = 0×0A7E4051;   // for connecting with any other machine at same network
 
 	// Creating a connection status which will connect to a remote host
 	if (0 != connect(*client_sockfd, (struct sockaddr*)&client_address, sizeof(struct sockaddr)))
