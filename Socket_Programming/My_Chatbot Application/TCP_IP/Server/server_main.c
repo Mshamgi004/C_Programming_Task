@@ -2,11 +2,11 @@
 
 int main()
 {	
-    // fd_set for reading, writing and exception for socket fd
+    	// fd_set for reading, writing and exception for socket fd
 	fd_set readfds;
 	fd_set writefds;
 	fd_set exceptfds;
-    int server_sockfd;
+    	int server_sockfd;
 
 	int maxval_fd = 0;   // A max sock_fd declared to hold the server_sockfd value
 
