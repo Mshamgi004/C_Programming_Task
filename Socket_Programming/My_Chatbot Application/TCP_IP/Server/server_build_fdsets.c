@@ -13,8 +13,8 @@ int server_build_fdsets(int server_sockfd, fd_set *readfds, fd_set *writefds, fd
 	// Loop use to fill the readfds with all the socket fd's 
 	for(int val = 0; val < server.total_client; val++) 
 	{
-        FD_SET(server.client_list[val].file_des,readfds);
-        maxval_fd++;
-    }
-    return maxval_fd;
+        	FD_SET(server.client_list[val].file_des,readfds);
+        	maxval_fd++;
+    	}
+    	return maxval_fd;
 }
