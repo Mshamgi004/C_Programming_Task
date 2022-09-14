@@ -5,7 +5,6 @@ int main()
 {
 	//char get_name[1024];
 	int client_sockfd = 0;   // Declaring the client_sockfd
-	int new_socket = 0;
 	int maxval_fd = 0;    // A max sock_fd declared to hold the server_sockfd value
 
 	// Declaring the read,write and except fd's for select()
