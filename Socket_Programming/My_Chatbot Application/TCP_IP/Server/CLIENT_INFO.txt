@@ -1,12 +1,35 @@
-NAME = Alpha
-IP ADDRESS = 127.0.0.1
-Port number = 44862
-NAME = Beta
-IP ADDRESS = 127.0.0.1
-Port number = 44864
-NAME = Gamma
-IP ADDRESS = 127.0.0.1
-Port number = 36404
-NAME = Delta
-IP ADDRESS = 127.0.0.1
-Port number = 52508
+||--The new connected client Mahadev information--||
+	1.Name = Mahadev
+	2.IP Address = 127.0.0.1
+	3.Port number = 44982
+	4.File Descriptor = 4
+||--The new connected client Beta information--||
+	1.Name = Beta
+	2.IP Address = 127.0.0.1
+	3.Port number = 44984
+	4.File Descriptor = 5
+||--The new connected client Gamma information--||
+	1.Name = Gamma
+	2.IP Address = 127.0.0.1
+	3.Port number = 37212
+	4.File Descriptor = 6
+||--The new connected client Gamma information--||
+	1.Name = Gamma
+	2.IP Address = 127.0.0.1
+	3.Port number = 51494
+	4.File Descriptor = 4
+||--The new connected client ALpha information--||
+	1.Name = ALpha
+	2.IP Address = 127.0.0.1
+	3.Port number = 37194
+	4.File Descriptor = 4
+||--The new connected client Beta information--||
+	1.Name = Beta
+	2.IP Address = 127.0.0.1
+	3.Port number = 59858
+	4.File Descriptor = 5
+||--The new connected client Gamma information--||
+	1.Name = Gamma
+	2.IP Address = 127.0.0.1
+	3.Port number = 59860
+	4.File Descriptor = 6
