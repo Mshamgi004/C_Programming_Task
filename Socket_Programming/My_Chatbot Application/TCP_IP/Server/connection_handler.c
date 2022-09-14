@@ -8,15 +8,14 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 	//get the name, IP Address and port no: client 
 	char ip[INET_ADDRSTRLEN] = { 0 };  // char buffer to store the ip address of connected clients
 	char client_buffer[MAX_BUFFER_SIZE] = { 0 };   // char buffer to store the name of connected clients
-	int port = ntohs(client_information.sin_port);
-	char port_number[MAX_BUFFER_SIZE];
+	int port = ntohs(client_information.sin_port);   // Storing the port variable with the port number designated  
+	char port_number[MAX_BUFFER_SIZE];      // char port_number to store the port no.
 
-	char client1_password[MAX_BUFFER_SIZE] = { 0 };
+	//char client1_password[MAX_BUFFER_SIZE] = { 0 };
+	//char file_buffer[10][100];
+	
+	inet_ntop(AF_INET, &(client_information.sin_addr), ip, INET_ADDRSTRLEN);        // converting the network address structure in AF_INET to char string
 
-	char file_buffer[10][100];
-	
-	inet_ntop(AF_INET, &(client_information.sin_addr), ip, INET_ADDRSTRLEN);
-	
 	server_recv_from_client(new_server_sockfd, client_buffer);  // Function call to recieve the name from client
 
 	printf("\t||--------------Details of the client connected to server-----------------||\n");
