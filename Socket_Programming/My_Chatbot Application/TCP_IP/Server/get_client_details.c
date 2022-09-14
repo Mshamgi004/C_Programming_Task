@@ -9,20 +9,22 @@ int get_client_details(char *client_buffer, char *ip, char *port_number,int new_
 {
 	int nameExist;
 
-	FILE *fptr;
-	fptr = fopen("CLIENT_INFO.txt", "a+");
+	FILE *fptr;                                          // File pointer created 
+	fptr = fopen("CLIENT_INFO.txt", "a+");               // Appneding in the file
 	if(fptr == NULL)
 	{
 		fprintf(stderr, "Error in opening the file for appending\n");
 		exit(1);
 	}
+	
+	// Updation in the file 
+	fprintf(fptr, "||--The new connected client %s information--||\n", client_buffer);      
+	fprintf(fptr, "\t1.Name = %s\n",client_buffer);
+	fprintf(fptr, "\t2.IP Address = %s\n",ip);
+	fprintf(fptr, "\t3.Port number = %s\n",port_number);
+	fprintf(fptr, "\t4.File Descriptor = %d\n",new_server_sockfd);
 
-	fprintf(fptr, "Name = %s\n",client_buffer);
-	fprintf(fptr, "IP Address = %s\n",ip);
-	fprintf(fptr, "Port number = %s\n",port_number);
-	fprintf(fptr, "File Descriptor = %d\n",new_server_sockfd);
-
-	fclose(fptr);
+	fclose(fptr);     // Closing the file 
 }
 // 	int nameExist = 0;
 // 	int i_val;
