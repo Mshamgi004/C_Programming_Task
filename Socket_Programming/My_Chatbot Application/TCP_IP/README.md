@@ -34,7 +34,8 @@ COMMAND : ./client (Name of client).
 
 #3 : SERVER SIDE SHOWCASE OF CONNECTED CLEINT INFORMATION
 
-![Screenshot from 2022-09-20 13-15-43](https://user-images.githubusercontent.com/98145598/191221111-fefa18be-fbf1-4130-872f-89fec7657b17.png)
+![Screenshot from 2022-09-20 14-53-44](https://user-images.githubusercontent.com/98145598/191221278-d823ac5e-aec9-4c7a-a91d-84bda89ee83c.png)
+
 
 
 
