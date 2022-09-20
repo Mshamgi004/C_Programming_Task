@@ -11,7 +11,7 @@ int accept_new_connection(int server_sockfd, int* new_server_sockfd)
 
 	if ((*new_server_sockfd = accept(server_sockfd, (struct sockaddr*)&client_address, &server_length)) < 0)  // Accepting the pending connection
 	{
-		printf("******ERROR :Accept failed*******");
+		printf("\t||*******************ERROR : accept() failed************************||\n");
 		return -1;
 	}
 	else
