@@ -1,5 +1,3 @@
-//**********************************************WORKING ON THIS*********************************************//
-
 #include "server.h"
 
 //processing the received data from clients
@@ -11,12 +9,11 @@ int process_recv_data(int socket, char* buffer)
 
 	int index_sender = 0;    // Variable for index_sender verifier
 	int index_receiver = 0;  // Variable for index_reciever verifier
-	int len = 0;
 
 	index_sender = find_the_client_index_list(socket); // Storing the index values of client in index_sender
 
-	
-	if (strncmp(buffer, "LIST", 4) == 0) // Providing the list to client by server using cmd 
+	// Providing the list to client by server using cmd 
+	if (strncmp(buffer, "LIST", 4) == 0)
 	{
 		// Setting the buffer initially
 		memset(buffer, 0, sizeof(send_buffer));
@@ -31,28 +28,28 @@ int process_recv_data(int socket, char* buffer)
 		server_send_to_client(socket, buffer);   // sending it to client
 		goto out;
 	}
-	// else
-	// {
-	// 	printf("****Can't list the items*****\n");
-	// }
 
-	if (strncmp(buffer, "CONNECT", 7) == 0)     // To connect to another client
+	// To connect to another client
+	if (strncmp(buffer, "CONNECT", 7) == 0)    
 	{
-        printf("\t||-----------------------I want to talk with %s----------------------||\n", buffer);
+        printf("\tI want to talk :%s\n", buffer);
+		
 		sscanf(buffer, "\t%*[^:]:%s", chat_c);
 		strcpy(server.client_list[index_sender].chatwith, chat_c);
 
 		index_receiver = find_the_client_index_by_name(server.client_list[index_sender].chatwith);
 		server.client_list[index_sender].chatwith_fd = server.client_list[index_receiver].file_des;
+		
 		server_send_to_client(server.client_list[index_sender].file_des, CONNECTED);
 		goto out;
 	}
 
+	// To showcase the message to the connected client from the server
 	if (strlen(server.client_list[index_sender].chatwith) != 0)
 	{
 		snprintf(send_buffer, sizeof(send_buffer), "\t[%s] : %s\n", server.client_list[index_sender].client_name, buffer);
-		printf("\t||-------Message of client stored in a buffer so as to send = %s-----||\n", send_buffer);
-
+		printf("\tMessage from Client: %s\n", send_buffer);
+		
 		server_send_to_client(server.client_list[index_sender].chatwith_fd, send_buffer);
 	}
 
