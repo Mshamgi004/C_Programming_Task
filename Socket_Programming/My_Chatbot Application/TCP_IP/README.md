@@ -36,9 +36,14 @@ COMMAND : ./client (Name of client).
 
 ![Screenshot from 2022-09-20 14-53-44](https://user-images.githubusercontent.com/98145598/191221278-d823ac5e-aec9-4c7a-a91d-84bda89ee83c.png)
 
-#4 : LISTING THE CONNECTED CLIENT DETAILS ON CLIENT SIDE SO AS TO COMMUNICATE
+#4 : LISTING THE CONNECTED CLIENT NAMES ON CLIENT SIDE SO AS TO COMMUNICATE
 
 ![Screenshot from 2022-09-20 13-21-53](https://user-images.githubusercontent.com/98145598/191231852-58039b04-df42-466f-bdd7-5d4fdc9bd68c.png)
+
+#5 : CLIENT_INFO.txt file in server side holding the client information such as the name, IP Address, port number and file descriptor respectively
+
+![Screenshot from 2022-09-20 15-48-10](https://user-images.githubusercontent.com/98145598/191233394-43586353-2014-44aa-9c30-10a35fd42811.png)
+
 
 
 
