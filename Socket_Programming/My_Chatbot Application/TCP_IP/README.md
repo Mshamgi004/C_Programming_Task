@@ -1,4 +1,4 @@
-#||-----------------------------------------------------------------------MY_CHATBOT APPLICATION----------------------------------------------------------------------||
+||-----------------------------------------------------------------------MY_CHATBOT APPLICATION----------------------------------------------------------------------||
 
 ||*******************************************************************************************************************************************************************||
  TASK: TO CREATE A CHATBOT APPLICATION WHICH WILL COMMUNICATE BETWEEN TWO CLIENTS. BY DOING SO THE SERVER WILL STORE THE CLIENT DETAILS SUCH AS THE NAME,IP ADDRESS.       PORT NUMBER AND fd's IN A CLIENT_INFO.txt file.
@@ -13,3 +13,11 @@
  OBJECTIVE 6: The CLIENT_INFO.txt has the details of the connected client's such as the name, ip address, port number and their fd's. And there should be updation 
               in the .text file after every new entry of client.
  
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LIST OF OUTPUTS ON TERMINAL OF UBUNTU 18.04 LTS
+
+#1 : SERVER SIDE CONNECTION
+
+![Screenshot from 2022-09-20 13-48-42](https://user-images.githubusercontent.com/98145598/191218005-ef406e0d-b2e7-4768-868f-a6090936b315.png)
