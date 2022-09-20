@@ -13,7 +13,7 @@ int server_send_to_client(int client_socket, char* send_msg)
 	}
 	else
 	{
-		perror("*****Error : send failed*****");
+		perror("\t||************************ERROR : send() failed***************************||\n");
 		return -1;
 	}
 	return write_bytes;
