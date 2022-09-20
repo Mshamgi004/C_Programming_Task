@@ -22,7 +22,7 @@ int client_send_to_server(int client_socket, char* send_msg)
 
 	if ((write_bytes = send(client_socket, send_msg, len, 0)) <= 0)   // Storing the send buffer in serlen
 	{
-		perror("****ERROR: send() failed*****\n");
+		perror("\t||************************ERROR: send() failed****************************||\n");
 		return -1;
 	}
 	else
