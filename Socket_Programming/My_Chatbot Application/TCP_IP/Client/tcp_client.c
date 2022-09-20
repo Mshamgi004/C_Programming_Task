@@ -59,30 +59,12 @@ int client_select(int maxval_fd, int listenfd, fd_set *readfds, fd_set *writefds
 int Client_decision();//(int client_sockfd, char* send_buffer);
 //void server_delete_client(int socket_fd_delete); 
 
-// struct client
-// {
-// 	char client_name[MAX_NAME_SZE];
-// 	char chatwith[MAX_NAME_SZE];
-// 	int chatwith_fd;
-// 	int file_des;
-// 	int port;
-// 	char ip[INET_ADDRSTRLEN];
-
-// }detail;
-
-// // Data structure to hold the total no of clients
-// struct server_data
-// {
-// 	int total_client;
-// 	struct client client_list[NO_OF_CLIENTS];
-
-// }server;
-
+// Main function
 //int main()
 int main(int argc, char* argv[])
 {
-    //char buffer[MAX_NAME_SZE];
-	int client_sockfd = 0;
+	//char get_name[1024];
+	int client_sockfd = 0;   // Declaring the client_sockfd
 	int maxval_fd = 0;    // A max sock_fd declared to hold the server_sockfd value
 
 	// Declaring the read,write and except fd's for select()
@@ -90,24 +72,68 @@ int main(int argc, char* argv[])
 	fd_set writefds;
 	fd_set exceptfds;
 
-    //printf("Enter the name: ");
-    //scanf("%s",buffer);
+	//char buffer1[1000];         // char buffer[] used to store the name
+	//char buffer2[1000];         // char buffer[] used to store the password
 
-    //strcpy(client_name, buffer);
+	// printf("Please enter your name: ");                  
+	// scanf("%s", buffer1);                           // Entering the name from client side.
+	//fgets(buffer, 1000, stdin);
+	//strcpy(client_name, buffer1);            // Copying the recived name in buffer and sending it to the client_name
+	
+	// printf("\tYou are logged in !!!. Create a password for registration\n");
+	// scanf("%s",buffer2);
 
+
+	// strcpy(password, buffer2);
+	//fgets(client_name, MAX_BUFFER_SIZE, stdin);          // fgets() used to recieve the name of the client
+	// if(fgets(client_name, MAX_BUFFER_SIZE, stdin) != NULL)
+	// {
+	// 	char *array;
+	// 	int length;
+	// 	int number;
+
+	// 	for(number = 0; number < length; number++)
+	// 	{
+	// 		if(array[number] = '\n')
+	// 		{
+	// 			array[number] = '\0';
+	// 			break;
+	// 		}
+	// 	}
+	// }
+	// if(strlen(client_name < 2 || strlen(client_name) >= MAX_BUFFER_SIZE - 1))
+	// {
+	// 	printf("\nName must be more than one and less than ");
+	// }
 	//To check the name given from cmd in binary
 	if (argc > 2)
 	{
-		printf("****ERROR : Parameters error****");
+		printf("\t||**********************ERROR : Parameters error****************************\n");
 		exit(0);
 	}
 
-	// Copying the string in client_name typed in cmd
 	strcpy(client_name, argv[1]);
+
+	// printf("\tYou are logged in !!!. Create a password for registration\n");
+	// scanf("%s",buffer2);
+
+
+	// strcpy(password, buffer2);
+	// printf("Enter your name: \n");
+	// fgets(get_name, 1024, stdin);
+	// printf("Name = %s\n", get_name);
+	// strcpy(client_name, get_name);
+	// printf("Name = %s\n", client_name);
+	//fgets(client_name, MAX_BUFFER_SIZE, stdin);
+	// Copying the string in client_name typed in cmd
+	//strcpy(client_name, argv[1]);
+
+	printf("\t||---------------------------CLIENT STARTED-------------------------------||\n");
+	printf("\t||************************************************************************||\n");
 
 	if (client_create_socket(&client_sockfd) != 0) // Function call for setting up of client
 	{
-		printf("*****ERROR : Socket creation failed*****");
+		printf("\t||*******************ERROR : Socket creation failed*************************\n");
 		exit(0);
 	}
 	else
@@ -130,11 +156,12 @@ int main(int argc, char* argv[])
 int client_create_socket(int* client_sockfd)
 {
 	int opt_port = 1;
+	//char get_name[1024];
 	struct sockaddr_in client_address;   // Creating a sockaddr structure to hold the client_addressess
 
 	if ((*client_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)   // Creating a client socket() 
 	{
-		printf("*****ERROR : Socket creation failed*****\n");
+		printf("\t||*******************ERROR : Socket creation failed***********************||\n");
 		return -1;
 	}
 	else
@@ -142,6 +169,12 @@ int client_create_socket(int* client_sockfd)
 		printf("\t--------------------Client socket created sucessfully-----------------------\n");
 		printf("\t----------------------------------------------------------------------------\n");
 	}
+
+	// printf("Enter your name: \n");
+	// fgets(get_name, 1024, stdin);
+	// printf("Name = %s\n", get_name);
+	// strcpy(client_name, get_name);
+	// printf("Name = %s\n", client_name);
 
 	setsockopt(*client_sockfd, SOL_SOCKET, (SO_REUSEADDR), &opt_port, sizeof(opt_port));
 
@@ -151,22 +184,25 @@ int client_create_socket(int* client_sockfd)
 	client_address.sin_addr.s_addr = INADDR_ANY;
 	//client_address.sin_addr.s_addr = 0×0A7E4051;   // for connecting with any other machine at same network
 
-
 	// Creating a connection status which will connect to a remote host
 	if (0 != connect(*client_sockfd, (struct sockaddr*)&client_address, sizeof(struct sockaddr)))
 	{
-		printf("****ERROR : Connect failed*****");
+		printf("\t||*********************ERROR : connect() failed***************************||\n");
 		return -1;
 	}
 	else
 	{
 		printf("\t--------------Client socket is ready to connect to server-------------------\n");
 		printf("\t----------------------------------------------------------------------------\n");
+
+		//printf("Enter your name:");
+		//scanf("%s\n", client_name);
 		client_send_to_server(*client_sockfd, client_name);  // Function call for sending the client_name as the client_sockfd is the return type
 	}
 
 	return 0;
 }
+
 
 // Function defination for client_build_fdsets
 int client_build_fdsets(int client_sockfd, fd_set* readfds, fd_set* writefds, fd_set* exceptfds)
@@ -193,9 +229,10 @@ int client_select(int maxval_fd, int client_sockfd, fd_set* readfds, fd_set* wri
 
 	int action = select(maxval_fd + 1, readfds, writefds, NULL, NULL);   // select() system call 
 
+	// To check if the select() sys call is working or not
 	if (action == -1 || action == 0)
 	{
-		printf("****ERROR: select()****\n");
+		printf("\t||***************************ERROR: select()******************************||\n");
 		exit(0);
 	}
 	// To check for all the clients in the file des inside the readfds
@@ -213,12 +250,11 @@ int client_select(int maxval_fd, int client_sockfd, fd_set* readfds, fd_set* wri
 		}
 		else
 		{
-			("Not able to enter the send_to_server\n");
+			printf("\tNot able to enter the send_to_server\n");
 		}
 	}
 	return 0;
 }
-
 
 // Function defination of sending message to the server
 int client_send_to_server(int client_socket, char* send_msg)
@@ -230,20 +266,31 @@ int client_send_to_server(int client_socket, char* send_msg)
 	char send_buffer[MAX_BUFFER_SIZE];
 	int client_sockfd;
 
+	// printf("Enter your name: \n");
+	// fgets(buffer, 1024, stdin);
+	// printf("Name = %s\n", buffer);
+	// strcpy(client_name, buffer);
+	// printf("Name = %s\n", client_name);
+	// //printf("Enter your name:");
+	// //scanf("%s\n", client_name);
+	// strcpy(send_msg, client_name);
+	//printf("Mess = %s\n", send_msg);
 
 	if ((write_bytes = send(client_socket, send_msg, len, 0)) <= 0)   // Storing the send buffer in serlen
 	{
-		//perror("****ERROR: send() failed*****\n");
+		perror("\t||************************ERROR: send() failed****************************||\n");
 		return -1;
 	}
 	else
 	{
-		printf("--------ENTER THE APPLICATION--------\n");
-		//Client_decision(client_sockfd, send_buffer);
+		//printf("--------ENTER THE APPLICATION--------\n");
+		Client_decision();//(client_sockfd, send_buffer);
 	}
-	Client_decision(client_sockfd, send_buffer);
+	//Client_decision(client_sockfd, send_buffer);
 	return write_bytes;
 }
+
+
 
 // Function defination to recv message from server
 int client_recv_from_server(int client_socket, char* recv_msg)
@@ -257,20 +304,22 @@ int client_recv_from_server(int client_socket, char* recv_msg)
 
 	}
 	else if (read_bytes == 0)
+	//else
 	{
-		printf("*****Client Disconnected*****\n");
+		printf("\t**********************CLIENT DISCONNECTED****************************\n");
 		//server_delete_client(socket_fd_delete);
 		close(client_socket);
 	}
 	else
 	{
-		printf("*****ERROR: recv() failed*****\n");
+		printf("\t||***********************ERROR: recv() failed*****************************||\n");
 	}
 
 	return 0;
 }
 
-// Function defination for cleint decision
+
+// Function defination for client decision
 int Client_decision()//(int client_sockfd, char* send_buffer)
 {
 	int choice = 0;
