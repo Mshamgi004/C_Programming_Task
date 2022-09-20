@@ -20,5 +20,19 @@ LIST OF OUTPUTS ON TERMINAL OF UBUNTU 18.04 LTS
 
 #1 : SERVER SIDE CONNECTION
 
+Command : ./server
+
 ![Screenshot from 2022-09-20 14-42-45](https://user-images.githubusercontent.com/98145598/191218666-da7662c4-77aa-45c7-9653-6c12ed78e8d6.png)
+
+#2 : CLIENT SIDE CONNECTION
+
+COMMAND : ./client (Name of client).
+        Note: Using command line argument for naming of the client
+
+![Screenshot from 2022-09-20 14-48-07](https://user-images.githubusercontent.com/98145598/191219978-2ab313c6-65aa-4765-8469-a1ccd4cf6053.png)
+![Screenshot from 2022-09-20 13-16-10](https://user-images.githubusercontent.com/98145598/191220072-8a5f550d-7bb0-4e4c-b014-ef7cb7233335.png)
+
+
+
+
 
