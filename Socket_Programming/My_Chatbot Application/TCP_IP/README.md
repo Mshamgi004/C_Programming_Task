@@ -1,8 +1,8 @@
-||-----------------------------------------------------------------------MY_CHATBOT APPLICATION----------------------------------------------------------------------||
+||-----------------------------------------------------------------------MY_CHATBOT APPLICATION-------------------------------------------------------------------||
 
-||*******************************************************************************************************************************************************************||
+||****************************************************************************************************************************************************************||
  TASK: TO CREATE A CHATBOT APPLICATION WHICH WILL COMMUNICATE BETWEEN TWO CLIENTS. BY DOING SO THE SERVER WILL STORE THE CLIENT DETAILS SUCH AS THE NAME,IP ADDRESS.       PORT NUMBER AND fd's IN A CLIENT_INFO.txt file.
-||*******************************************************************************************************************************************************************||
+||****************************************************************************************************************************************************************||
 
 
  OBJECTIVE 1: Maintain the connected client details in server's data structure and store them in a text file.
@@ -35,6 +35,10 @@ COMMAND : ./client (Name of client).
 #3 : SERVER SIDE SHOWCASE OF CONNECTED CLEINT INFORMATION
 
 ![Screenshot from 2022-09-20 14-53-44](https://user-images.githubusercontent.com/98145598/191221278-d823ac5e-aec9-4c7a-a91d-84bda89ee83c.png)
+
+#4 : CLIENT SIDE PROMPT SHOWCASE FOR TAKING REQUIRED ACTION
+
+
 
 
 
