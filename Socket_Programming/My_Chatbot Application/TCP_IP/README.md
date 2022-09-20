@@ -20,4 +20,5 @@ LIST OF OUTPUTS ON TERMINAL OF UBUNTU 18.04 LTS
 
 #1 : SERVER SIDE CONNECTION
 
-![Screenshot from 2022-09-20 13-48-42](https://user-images.githubusercontent.com/98145598/191218005-ef406e0d-b2e7-4768-868f-a6090936b315.png)
+![Screenshot from 2022-09-20 14-42-45](https://user-images.githubusercontent.com/98145598/191218666-da7662c4-77aa-45c7-9653-6c12ed78e8d6.png)
+
