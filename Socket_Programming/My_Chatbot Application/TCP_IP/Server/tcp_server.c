@@ -103,13 +103,14 @@ int main()
 
 	memset(&server, 0, sizeof(struct server_data));   // Clearing the structure to hold the total clients
 	//memset(&values, 0, sizeof(struct client));
+	
 	printf("\t||---------------------------SERVER STARTED-------------------------------||\n");
 	printf("\t||************************************************************************||\n");
 	
 
 	if (setup_server(&server_sockfd) != 0)   // Function call for setting up of server
 	{
-		printf("*****ERROR : Creation socket failed******");
+		printf("\t||*******************ERROR : Creation socket failed***********************||\n");
 		exit(0);
 	}
 	else
@@ -124,10 +125,10 @@ int main()
 	}
 
 	cleanup();
-	
+	//printf("Bye From server\n");
+
 	return 0;
 }
-
 
 
 // Function call to setup the server socket fd
@@ -138,12 +139,11 @@ int setup_server(int* server_sockfd)
 
 	if ((*server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)   // Creating a server socket         
 	{
-		perror("*****ERROR : Socket creation failed******");
+		perror("\t*********************ERROR : Socket creation failed*************************\n");
 		return -1;
 	}
 	else
 	{
-		printf("\t||---------------------------SERVER STARTED-------------------------------||\n");
 		printf("\t--------------------Server socket created sucessfully-----------------------\n");
 		printf("\t----------------------------------------------------------------------------\n");
 	}
@@ -153,11 +153,11 @@ int setup_server(int* server_sockfd)
 	server_address.sin_port = htons(SERVER_PORT);
 	server_address.sin_addr.s_addr = INADDR_ANY;
 
-	setsockopt(*server_sockfd, SOL_SOCKET, (SO_REUSEADDR), &opt_port, sizeof(opt_port));   // Forcefully sets the port
+	setsockopt(*server_sockfd, SOL_SOCKET, (SO_REUSEADDR), &opt_port, sizeof(opt_port));   // Focrcefully sets the port
 
 	if (0 != bind(*server_sockfd, (struct sockaddr*)&server_address, sizeof(struct sockaddr)))   // Binding the socket
 	{
-		printf("******ERROR : Socket bind failed******");
+		printf("\t***********************ERROR : Socket bind failed***************************\n");
 		return -1;
 	}
 	else
@@ -168,7 +168,7 @@ int setup_server(int* server_sockfd)
 
 	if (0 != listen(*server_sockfd, LISTEN_BACKLOG))    // Listening the incoming connection
 	{
-		printf("******ERROR : socket listen failed******");
+		printf("\t**********************ERROR : Socket listen failed**************************\n");
 		return -1;
 	}
 	else
@@ -203,7 +203,6 @@ int server_build_fdsets(int server_sockfd, fd_set *readfds, fd_set *writefds, fd
 // Function defination of server_select
 int server_select(int maxval_fd, int server_sockfd, fd_set* readfds, fd_set* writefds)
 {
-	//struct server_data server;
 	// Declaring the new server sock_fd and char buffer for storing the sending and recieving message
 	int new_server_sockfd = 0;
 	char recv_buff[MAX_BUFFER_SIZE];
@@ -218,7 +217,7 @@ int server_select(int maxval_fd, int server_sockfd, fd_set* readfds, fd_set* wri
 	// Checking for the working of select() system call
 	if (select_action == -1 || select_action == 0)
 	{
-		printf("*****ERROR : select()*****");
+		printf("\t||*************************ERROR : select()*******************************||\n");
 		exit(0);
 	}
 
@@ -227,7 +226,7 @@ int server_select(int maxval_fd, int server_sockfd, fd_set* readfds, fd_set* wri
 	{
 		// Then accecpt the new connection
 		accept_new_connection(server_sockfd, &new_server_sockfd);
-		printf("\t||-----------------------New socket created = %d--------------------------||\n", new_server_sockfd);
+		//printf("\t||-----------------------New socket created = %d--------------------------||\n", new_server_sockfd);
 	}
 
 	// To check the fd is set for sending the message so as to broadcast the message to all clients
@@ -259,7 +258,6 @@ int server_select(int maxval_fd, int server_sockfd, fd_set* readfds, fd_set* wri
 // Function defination for accepting the new connection
 int accept_new_connection(int server_sockfd, int* new_server_sockfd)
 {
-	//struct server_data server;
 	struct sockaddr_in client_address;  // struct sockaddr_in in client_address
 	int server_length;    // Creating a variable -> server_length
 	server_length = sizeof(struct sockaddr);   // assigning the address to the variable server_length
@@ -268,7 +266,7 @@ int accept_new_connection(int server_sockfd, int* new_server_sockfd)
 
 	if ((*new_server_sockfd = accept(server_sockfd, (struct sockaddr*)&client_address, &server_length)) < 0)  // Accepting the pending connection
 	{
-		printf("******ERROR :Accept failed*******");
+		printf("\t||*******************ERROR : accept() failed************************||\n");
 		return -1;
 	}
 	else
@@ -281,7 +279,7 @@ int accept_new_connection(int server_sockfd, int* new_server_sockfd)
 	return 0;
 }
 
-// *****************************WORKING***************************** //
+	
 // Function defination to handle the client
 void handle_connection(struct sockaddr_in client_information, int new_server_sockfd)
 {
@@ -289,14 +287,15 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 	//get the name, IP Address and port no: client 
 	char ip[INET_ADDRSTRLEN] = { 0 };  // char buffer to store the ip address of connected clients
 	char client_buffer[MAX_BUFFER_SIZE] = { 0 };   // char buffer to store the name of connected clients
-	int port = ntohs(client_information.sin_port);
-	char port_number[MAX_BUFFER_SIZE];
+	int port = ntohs(client_information.sin_port);  // Storing the port variable with the port number designated  
+	char port_number[MAX_BUFFER_SIZE];   // char port_number to store the port no.
+	int socket_fd_delete;
 
 	//char client1_password[MAX_BUFFER_SIZE] = { 0 };
 
 	//char file_buffer[10][100];
 	
-	inet_ntop(AF_INET, &(client_information.sin_addr), ip, INET_ADDRSTRLEN);
+	inet_ntop(AF_INET, &(client_information.sin_addr), ip, INET_ADDRSTRLEN);  // converting the network address structure in AF_INET to char string
 	
 	server_recv_from_client(new_server_sockfd, client_buffer);  // Function call to recieve the name from client
 
@@ -317,7 +316,7 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 
 	// client_handle_list(client_buffer, ip, port_number);
 	get_client_details(client_buffer, ip, port_number,new_server_sockfd);
-
+	//get_client_details(client_buffer, ip, port_number, new_server_sockfd, socket_fd_delete);
 
 	printf("\t __________________Storing client data in CLIENT_INFO.txt___________________\n");
 
@@ -325,7 +324,7 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 	// To check for the no. of clients connected 
 	if (server.total_client >= NO_OF_CLIENTS)
 	{
-		printf("****ERROR : No more space for client to save****\n");
+		printf("\t||***************ERROR : NO MORE CLIENT CAN CONNECT*****************||\n");
 	}
 
 	//populate the new client data and saving it in client_list
@@ -341,60 +340,32 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 }
 
 
-
-// #1: Using the logic of comparing the strings by storing all of them to a file_buffer and comparing the text file
+// Function defination for file operation
 //int get_client_details(char *client_buffer, char *ip, char *port_number)
+//int get_client_details(char *client_buffer, char *ip, char *port_number,int new_server_sockfd, int socket_fd_delete)
 int get_client_details(char *client_buffer, char *ip, char *port_number,int new_server_sockfd)
 {
-	FILE *fptr;      // FIle ptr created 
-	fptr = fopen("CLIENT_INFO.txt", "a+");   //File opened for appending  
+	FILE *fptr;
+	FILE *fptr1;
+	int delete = 0;
+	
+	fptr = fopen("CLIENT_INFO.txt", "a+");
 	if(fptr == NULL)
 	{
 		fprintf(stderr, "Error in opening the file for appending\n");
 		exit(1);
 	}
-
-    // Updating the file contents
+	
 	fprintf(fptr, "||--The new connected client %s information--||\n", client_buffer);
 	fprintf(fptr, "\t1.Name = %s\n",client_buffer);
 	fprintf(fptr, "\t2.IP Address = %s\n",ip);
 	fprintf(fptr, "\t3.Port number = %s\n",port_number);
-	fprintf(fptr, "\t4.File Descriptor = %d\n",new_server_sockfd);
+	fprintf(fptr, "\t4.File descriptor = %d\n",new_server_sockfd);
+	
+	//fprintf(fptr, "\t4.Deleted File Descriptor = %d\n",socket_fd_delete);
 
-	fclose(fptr);   //Closing the file
 
-	// fptr = fopen("CLIENT_INFO.txt", "r");
-	// if(fptr == NULL)
-	// {
-	// 	fprintf(stderr, "Error in opening the file\n");
-	// 	exit(1);
-	// }
-
-	// while(fread)
-
-	// while(fread(&client_buffer, sizeof(client_buffer),1,  fptr) != 0)
-	// {
-	// 	for(i_val = 0; i_val < server.total_client; i_val++)
-	// 	{
-	// 		if(strcmp(values.client_name, client_buffer) == 0)
-	// 		{	
-	// 			nameExist = 1;
-	// 			break;
-	// 		}
-	// 	}
-	// }
-	// if(nameExist == 0)
-	// {
-	// 	printf("Name exist ");
-	// }
-	// else
-	// {
-	// 	printf("Name not found\n");
-	// }
-
-	//fclose(fptr);
-
-	return 0;
+	fclose(fptr);
 }
 
 // Function defination of find index of the client data structure from client name
@@ -432,16 +403,17 @@ int find_the_client_index_list(int socket)
 //processing the received data from clients
 int process_recv_data(int socket, char* buffer)
 {
-	//struct server_data server;
 	// Creating the chatting and sending buffer to store the message 
 	char chat_c[MAX_BUFFER_SIZE];
 	char send_buffer[MAX_BUFFER_SIZE] = { 0 };
 
 	int index_sender = 0;    // Variable for index_sender verifier
 	int index_receiver = 0;  // Variable for index_reciever verifier
+
 	index_sender = find_the_client_index_list(socket); // Storing the index values of client in index_sender
 
-	if (strncmp(buffer, "LIST", 4) == 0) // Providing the list to client by server using cmd 
+	// Providing the list to client by server using cmd 
+	if (strncmp(buffer, "LIST", 4) == 0)
 	{
 		// Setting the buffer initially
 		memset(buffer, 0, sizeof(send_buffer));
@@ -456,28 +428,28 @@ int process_recv_data(int socket, char* buffer)
 		server_send_to_client(socket, buffer);   // sending it to client
 		goto out;
 	}
-	// else
-	// {
-	// 	printf("****Can't list the items*****\n");
-	// }
 
-	if (strncmp(buffer, "CONNECT", 7) == 0)     // To connect to another client
+	// To connect to another client
+	if (strncmp(buffer, "CONNECT", 7) == 0)    
 	{
-        printf("\t||-----------------------I want to talk with %s----------------------||\n", buffer);
+        printf("\tI want to talk :%s\n", buffer);
+		
 		sscanf(buffer, "\t%*[^:]:%s", chat_c);
 		strcpy(server.client_list[index_sender].chatwith, chat_c);
 
 		index_receiver = find_the_client_index_by_name(server.client_list[index_sender].chatwith);
 		server.client_list[index_sender].chatwith_fd = server.client_list[index_receiver].file_des;
+		
 		server_send_to_client(server.client_list[index_sender].file_des, CONNECTED);
 		goto out;
 	}
 
+	// To showcase the message to the connected client from the server
 	if (strlen(server.client_list[index_sender].chatwith) != 0)
 	{
 		snprintf(send_buffer, sizeof(send_buffer), "\t[%s] : %s\n", server.client_list[index_sender].client_name, buffer);
-		printf("\t||-------Message of client stored in a buffer so as to send = %s-----||\n", send_buffer);
-
+		printf("\tMessage from Client: %s\n", send_buffer);
+		
 		server_send_to_client(server.client_list[index_sender].chatwith_fd, send_buffer);
 	}
 
@@ -499,17 +471,17 @@ int server_send_to_client(int client_socket, char* send_msg)
 	}
 	else
 	{
-		perror("*****Error : send failed*****");
+		perror("\t||************************ERROR : send() failed***************************||\n");
 		return -1;
 	}
 	return write_bytes;
 }
 
+
 // Function defination for recieving the name from client
 int server_recv_from_client(int client_socket, char* recv_msg)
 {
-
-	int read_bytes = 0;   // Variable use to store the read_bytes
+	int read_bytes;   // Variable use to store the read_bytes
 	memset(recv_msg, 0, strlen(recv_msg));  // Clearing the buffer initially
 
 	if ((read_bytes = recv(client_socket, recv_msg, MAX_BUFFER_SIZE, 0)) > 0)
@@ -519,12 +491,12 @@ int server_recv_from_client(int client_socket, char* recv_msg)
 	else if (read_bytes == 0)
 	{
 		
-		printf("\t************************Client Disconnected*******************************\n");
+		printf("\t||------------------------CLIENT DISCONNECTED----------------------------||\n");
 		server_delete_client(client_socket);
 	}
 	else
 	{
-		printf("*****ERROR: recv() failed*****\n");
+		printf("\t||***********************ERROR: recv() failed*****************************||\n");
 	}
 
 	return 0;
@@ -533,24 +505,36 @@ int server_recv_from_client(int client_socket, char* recv_msg)
 // Function defination to delete the client
 void server_delete_client(int socket_fd_delete)
 {
-	//struct server_data server;
+	char client_buffer[MAX_NAME_SZE];
 	int delete = 0;
 	int index = 0;
 
-	// Iterating the variable till tital no. of clients
+	// char str[1000];
+	// int counter = 0;
+	// int line_no = 0;
+
+	
+
+	// Iterating the total fd's through whole structure total_list
 	for (delete = 0; delete < NO_OF_CLIENTS; delete++)
 	{
-		// Condition for deleting the client
+		// Condition for deleting the client by checking teh socket_fd_delete is present on structure
 		if (server.client_list[delete].file_des == socket_fd_delete)
 		{
-			server.total_client--;
-			printf("\t------------------Connected client deleted = [%d]\n---------------------------\n",socket_fd_delete);
-		}
+			// traversing through all the index values for deleting the client
+			for(index = delete; index < NO_OF_CLIENTS; index++)
+			{
+				//Array indexing shifting when there is client present in the structure
+				server.client_list[index] = server.client_list[index + 1];
+			}
+		}	
 	}
-
+	server.total_client--;
+	printf("\t||------------------Connected client deleted fd : [%d]--------------------||\n",socket_fd_delete);
 	close(socket_fd_delete);
 }
 
+// Function defination for cleanup()
 void cleanup() 
 {   
     //struct server_data server;
