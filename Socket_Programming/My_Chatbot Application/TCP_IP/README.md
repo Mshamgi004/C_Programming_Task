@@ -48,12 +48,11 @@ COMMAND : ./client (Name of client).
 
 ![Screenshot from 2022-09-20 16-05-36](https://user-images.githubusercontent.com/98145598/191236959-418fef22-614d-4843-a226-a16f1658b651.png)
 
-     COMMUNICATION BETWEEN CLIENT 1 to CLIENT 2
-     ![Screenshot from 2022-09-20 14-32-46](https://user-images.githubusercontent.com/98145598/191237159-12c18ff9-b084-4413-b950-9af8c568c56d.png)
+COMMUNICATION BETWEEN CLIENT 1 to CLIENT 2
+![Screenshot from 2022-09-20 14-32-46](https://user-images.githubusercontent.com/98145598/191237159-12c18ff9-b084-4413-b950-9af8c568c56d.png)
      
-     COMMUNICATION BETWEEN CLIENT 2 to CLIENT 1
-     
-     ![Screenshot from 2022-09-20 14-32-21](https://user-images.githubusercontent.com/98145598/191237243-540468fa-a3ff-4de0-ac89-9a757c1b4d7e.png)
+COMMUNICATION BETWEEN CLIENT 2 to CLIENT 1
+![Screenshot from 2022-09-20 14-32-21](https://user-images.githubusercontent.com/98145598/191237243-540468fa-a3ff-4de0-ac89-9a757c1b4d7e.png)
 
      
 
