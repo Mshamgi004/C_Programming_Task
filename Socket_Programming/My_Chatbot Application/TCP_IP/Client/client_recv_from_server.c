@@ -12,14 +12,15 @@ int client_recv_from_server(int client_socket, char* recv_msg)
 
 	}
 	else if (read_bytes == 0)
+	//else
 	{
-		printf("\t**********************Client Disconnected******************************\n");
+		printf("\t**********************CLIENT DISCONNECTED****************************\n");
 		//server_delete_client(socket_fd_delete);
 		close(client_socket);
 	}
 	else
 	{
-		printf("*****ERROR: recv() failed*****\n");
+		printf("\t||***********************ERROR: recv() failed*****************************||\n");
 	}
 
 	return 0;
