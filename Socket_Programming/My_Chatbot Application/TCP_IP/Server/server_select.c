@@ -17,7 +17,7 @@ int server_select(int maxval_fd, int server_sockfd, fd_set* readfds, fd_set* wri
 	// Checking for the working of select() system call
 	if (select_action == -1 || select_action == 0)
 	{
-		printf("*****ERROR : select()*****");
+		printf("\t||*************************ERROR : select()*******************************||\n");
 		exit(0);
 	}
 
@@ -26,7 +26,7 @@ int server_select(int maxval_fd, int server_sockfd, fd_set* readfds, fd_set* wri
 	{
 		// Then accecpt the new connection
 		accept_new_connection(server_sockfd, &new_server_sockfd);
-		printf("\t||-----------------------New socket created = %d--------------------------||\n", new_server_sockfd);
+		//printf("\t||-----------------------New socket created = %d--------------------------||\n", new_server_sockfd);
 	}
 
 	// To check the fd is set for sending the message so as to broadcast the message to all clients
