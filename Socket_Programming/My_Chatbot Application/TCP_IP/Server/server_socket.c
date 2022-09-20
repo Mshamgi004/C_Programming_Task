@@ -9,12 +9,11 @@ int setup_server(int* server_sockfd)
 
 	if ((*server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)   // Creating a server socket         
 	{
-		perror("*****ERROR : Socket creation failed******");
+		perror("\t*********************ERROR : Socket creation failed*************************\n");
 		return -1;
 	}
 	else
 	{
-		printf("\t||---------------------------SERVER STARTED-------------------------------||\n");
 		printf("\t--------------------Server socket created sucessfully-----------------------\n");
 		printf("\t----------------------------------------------------------------------------\n");
 	}
@@ -28,7 +27,7 @@ int setup_server(int* server_sockfd)
 
 	if (0 != bind(*server_sockfd, (struct sockaddr*)&server_address, sizeof(struct sockaddr)))   // Binding the socket
 	{
-		printf("******ERROR : Socket bind failed******");
+		printf("\t***********************ERROR : Socket bind failed***************************\n");
 		return -1;
 	}
 	else
@@ -39,7 +38,7 @@ int setup_server(int* server_sockfd)
 
 	if (0 != listen(*server_sockfd, LISTEN_BACKLOG))    // Listening the incoming connection
 	{
-		printf("******ERROR : socket listen failed******");
+		printf("\t**********************ERROR : Socket listen failed**************************\n");
 		return -1;
 	}
 	else
