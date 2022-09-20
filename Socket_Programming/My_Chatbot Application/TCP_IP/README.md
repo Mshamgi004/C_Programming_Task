@@ -24,7 +24,7 @@ Command : ./server
 
 ![Screenshot from 2022-09-20 14-42-45](https://user-images.githubusercontent.com/98145598/191218666-da7662c4-77aa-45c7-9653-6c12ed78e8d6.png)
 
-#2 : CLIENT SIDE CONNECTION
+#2 : CLIENT SIDE CONNECTION & PROMPT SHOWCASE FOR TAKING REQUIRED ACTION
 
 COMMAND : ./client (Name of client).
         Note: Using command line argument for naming of the client
@@ -36,7 +36,10 @@ COMMAND : ./client (Name of client).
 
 ![Screenshot from 2022-09-20 14-53-44](https://user-images.githubusercontent.com/98145598/191221278-d823ac5e-aec9-4c7a-a91d-84bda89ee83c.png)
 
-#4 : CLIENT SIDE PROMPT SHOWCASE FOR TAKING REQUIRED ACTION
+#4 : LISTING THE CONNECTED CLIENT DETAILS ON CLIENT SIDE SO AS TO COMMUNICATE
+
+![Screenshot from 2022-09-20 13-21-53](https://user-images.githubusercontent.com/98145598/191231852-58039b04-df42-466f-bdd7-5d4fdc9bd68c.png)
+
 
 
 
