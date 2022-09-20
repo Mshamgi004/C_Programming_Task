@@ -9,7 +9,7 @@ int client_create_socket(int* client_sockfd)
 
 	if ((*client_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)   // Creating a client socket() 
 	{
-		printf("*****ERROR : Socket creation failed*****\n");
+		printf("\t||*******************ERROR : Socket creation failed***********************||\n");
 		return -1;
 	}
 	else
@@ -35,7 +35,7 @@ int client_create_socket(int* client_sockfd)
 	// Creating a connection status which will connect to a remote host
 	if (0 != connect(*client_sockfd, (struct sockaddr*)&client_address, sizeof(struct sockaddr)))
 	{
-		printf("****ERROR : Connect failed*****");
+		printf("\t||*********************ERROR : connect() failed***************************||\n");
 		return -1;
 	}
 	else
