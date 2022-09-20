@@ -8,14 +8,16 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 	//get the name, IP Address and port no: client 
 	char ip[INET_ADDRSTRLEN] = { 0 };  // char buffer to store the ip address of connected clients
 	char client_buffer[MAX_BUFFER_SIZE] = { 0 };   // char buffer to store the name of connected clients
-	int port = ntohs(client_information.sin_port);   // Storing the port variable with the port number designated  
-	char port_number[MAX_BUFFER_SIZE];      // char port_number to store the port no.
+	int port = ntohs(client_information.sin_port);  // Storing the port variable with the port number designated  
+	char port_number[MAX_BUFFER_SIZE];   // char port_number to store the port no.
+	int socket_fd_delete;
 
 	//char client1_password[MAX_BUFFER_SIZE] = { 0 };
+
 	//char file_buffer[10][100];
 	
-	inet_ntop(AF_INET, &(client_information.sin_addr), ip, INET_ADDRSTRLEN);        // converting the network address structure in AF_INET to char string
-
+	inet_ntop(AF_INET, &(client_information.sin_addr), ip, INET_ADDRSTRLEN);  // converting the network address structure in AF_INET to char string
+	
 	server_recv_from_client(new_server_sockfd, client_buffer);  // Function call to recieve the name from client
 
 	printf("\t||--------------Details of the client connected to server-----------------||\n");
@@ -35,7 +37,7 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 
 	// client_handle_list(client_buffer, ip, port_number);
 	get_client_details(client_buffer, ip, port_number,new_server_sockfd);
-
+	//get_client_details(client_buffer, ip, port_number, new_server_sockfd, socket_fd_delete);
 
 	printf("\t __________________Storing client data in CLIENT_INFO.txt___________________\n");
 
@@ -43,7 +45,7 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 	// To check for the no. of clients connected 
 	if (server.total_client >= NO_OF_CLIENTS)
 	{
-		printf("****ERROR : No more space for client to save****\n");
+		printf("\t||***************ERROR : NO MORE CLIENT CAN CONNECT*****************||\n");
 	}
 
 	//populate the new client data and saving it in client_list
