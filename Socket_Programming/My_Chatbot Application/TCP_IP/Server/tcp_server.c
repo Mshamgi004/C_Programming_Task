@@ -2,14 +2,19 @@
 
 /*
  TASK: TO CREATE A CHATBOT APPLICATION WHICH WILL COMMUNICATE BETWEEN TWO CLIENTS.
-	   BY DOING SO THE SERVER WILL STORE THE CLIENT DETAILS SUCH AS THE  NAME, fd's , PORT  & IP ADDRESS IN A clientlist.txt file.
+	   BY DOING SO THE SERVER WILL STORE THE CLIENT DETAILS SUCH AS THE  NAME, fd's , Port number and IP Address in a CLIENT_INFO.txt file.
 */
 
-// OBJECTIVE 1: Maintain the connected client details in server's data structure
-// OBJECTIVE 2: Respond to command like LIST and CONNECT 
-// OBJECTIVE 3: Communicate between clients through server by using select() system call.
+#1: Maintain the connected client details in server's data structure and store them in a text file. 
+#2: Respond to commands like LIST and CONNECT 
+#3: Communicate between clients through server by using select() system call. 
+#4: Create a prompt on client side so as to make it user friendly application for clients. 
+#5: The CLIENT_INFO.txt has the details of the connected client's such as the name, IP Address, port number and their file descriptor. And there should be updation in the .text file after every new entry of client and also the status of deletion of the client should be shown in the text file after their exist. 
+#   PS: There is the concept of file modification done in between the running applcation as whenever any client connects to the server it's data is being shown in the text file and if the client connected gets disconnected from the application then there should be a status of client deleted from the the text file on the spot. 
+#6: Client should communicate with the other connected clients whose data are stored in Server side of CLIENT_INFO.txt. And Client should have the flexibility to communicate with any connected client.
 
 
+// Socket Programming Steps
 //STEP 1 : creating a socket file descriptor
 //STEP 2 : binding the socket with port and IP
 //STEP 3 : listening to the client requests
@@ -17,10 +22,6 @@
 //STEP 5 : recv/send for data communication
 //STEP 6 : closing the file descriptor
 
-
-//TASK-1 --> maintain the connected clients details in server data structure
-//TASK-3 --> respond to command like LIST and CONNECT from clients
-//TASK-4 --> communication between clients through server 
 
 /*********************************************************************************SERVER********************************************************************************************/
 
