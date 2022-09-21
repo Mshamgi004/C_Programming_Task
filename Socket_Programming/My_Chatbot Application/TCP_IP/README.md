@@ -63,11 +63,11 @@ COMMUNICATION BETWEEN CLIENT 2 to CLIENT 1
 
 ![Screenshot from 2022-09-20 15-48-10](https://user-images.githubusercontent.com/98145598/191233394-43586353-2014-44aa-9c30-10a35fd42811.png)
 
-     CLIENT_INFO.txt file in server side showing the disconnection status from the file
+CLIENT_INFO.txt file in server side showing the disconnection status from the file
 
 ![Screenshot from 2022-09-21 11-09-25](https://user-images.githubusercontent.com/98145598/191427120-1c62c4e8-4ca3-4bdb-b76f-decc37433c03.png)
  
-     Also the Client newly connected gets the updated list of client's with excluding the deleted client. Eg: Here in the below picture the newly connected client   GI is getting the updated list of client's excluding the deleted client Eta from the server.
+Also the Client newly connected gets the updated list of client's with excluding the deleted client. Eg: Here in the below picture the newly connected client GI is getting the updated list of client's excluding the deleted client Eta from the server.
 
 ![Screenshot from 2022-09-21 11-08-06](https://user-images.githubusercontent.com/98145598/191427651-1ee4b45d-b4cb-42ea-b2f8-9adba1eb1a25.png)
 
