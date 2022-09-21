@@ -69,7 +69,6 @@ struct server_data
 	struct client client_list[NO_OF_CLIENTS];
 }server;
 
-
 //Function declarations
 int setup_server(int* server_sockfd);
 int accept_new_connection(int server_sockfd, int* new_server_sockfd);
@@ -83,10 +82,15 @@ int find_the_client_index_list(int socket);
 int find_the_client_index_by_name(char* name);
 //int server_check_detail(char *cleint_buffer);
 //void display();
+//int get_client_details(char *client_buffer, char *ip, char *port_number);
 //int get_client_details(char *client_buffer, char *ip, char *port_numebr);
 int get_client_details(char *client_buffer, char *ip, char *port_number,int new_server_sockfd);
+int delete_client_details(int socket_fd_delete);
+//int get_client_details(char *client_buffer, char *ip, char *port_number,int new_server_sockfd, int socket_fd_delete);
 void server_delete_client(int client_socket);
 void cleanup(void);
+
+
 
 int main()
 {	
@@ -345,17 +349,16 @@ void handle_connection(struct sockaddr_in client_information, int new_server_soc
 //int get_client_details(char *client_buffer, char *ip, char *port_number,int new_server_sockfd, int socket_fd_delete)
 int get_client_details(char *client_buffer, char *ip, char *port_number,int new_server_sockfd)
 {
-	FILE *fptr;
-	FILE *fptr1;
-	int delete = 0;
+	FILE *fptr;    // Creating a file pointer
 	
-	fptr = fopen("CLIENT_INFO.txt", "a+");
+	fptr = fopen("CLIENT_INFO.txt", "a+");    // Opening of the file for appending
 	if(fptr == NULL)
 	{
 		fprintf(stderr, "Error in opening the file for appending\n");
 		exit(1);
 	}
 	
+	// Listing all the delails of the connected client on the text file
 	fprintf(fptr, "||--The new connected client %s information--||\n", client_buffer);
 	fprintf(fptr, "\t1.Name = %s\n",client_buffer);
 	fprintf(fptr, "\t2.IP Address = %s\n",ip);
@@ -363,9 +366,27 @@ int get_client_details(char *client_buffer, char *ip, char *port_number,int new_
 	fprintf(fptr, "\t4.File descriptor = %d\n",new_server_sockfd);
 	
 	//fprintf(fptr, "\t4.Deleted File Descriptor = %d\n",socket_fd_delete);
+	fclose(fptr);   // Closing the file pointer
+}
 
-
-	fclose(fptr);
+// Function defination for deleting the client details
+int delete_client_details(int socket_fd_delete)
+{   
+    FILE *fptr1;    // Creating a file pointer
+	
+	fptr1 = fopen("CLIENT_INFO.txt", "a+");   // Opening the file pointer for appending 
+	if(fptr1 == NULL)
+	{
+		fprintf(stderr, "Error in opening the file for appending\n");
+		exit(1);
+	}
+	
+	// Printing the status of the client which is being disconnected
+	fprintf(fptr1, "||--The client with file descriptor %d has been deleted from the list--||\n", socket_fd_delete); 
+    
+    fclose(fptr1);   // Closing the file pointer
+    
+    return 0;
 }
 
 // Function defination of find index of the client data structure from client name
@@ -531,7 +552,10 @@ void server_delete_client(int socket_fd_delete)
 	}
 	server.total_client--;
 	printf("\t||------------------Connected client deleted fd : [%d]--------------------||\n",socket_fd_delete);
-	close(socket_fd_delete);
+
+	delete_client_details(socket_fd_delete);   // Function call for client disconnection status in the file 
+	
+	close(socket_fd_delete);   // Closing the socket fd delete
 }
 
 // Function defination for cleanup()
@@ -544,9 +568,11 @@ void cleanup()
     
     for(int clean = 0; clean < server.total_client; clean++) 
     {
-        close(server.client_list[clean].file_des);
+        close(server.client_list[clean].file_des);   // Closing the client list after every termination of the server
     }
 }
+
+
 
 
 
