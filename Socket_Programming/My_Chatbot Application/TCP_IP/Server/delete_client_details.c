@@ -12,7 +12,7 @@ int delete_client_details(int socket_fd_delete)
 		    exit(1);
 	  }
 	
-	  fprintf(fptr1, "||--The client with file descriptor %d hs been deleted from the list--||\n", socket_fd_delete);         // Printing the status of client deletion
+	  fprintf(fptr1, "||--The client with file descriptor %d has been deleted from the list--||\n", socket_fd_delete);         // Printing the status of client deletion
     
     fclose(fptr1);         // Closing the fptr
      
