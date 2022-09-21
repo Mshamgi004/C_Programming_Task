@@ -1,5 +1,3 @@
-//*************************************************************WORKING ON THIS*********************************************//
-
 #include "server.h"
 
 // Function defination to delete the client
@@ -12,9 +10,7 @@ void server_delete_client(int socket_fd_delete)
 	// char str[1000];
 	// int counter = 0;
 	// int line_no = 0;
-
 	
-
 	// Iterating the total fd's through whole structure total_list
 	for (delete = 0; delete < NO_OF_CLIENTS; delete++)
 	{
@@ -31,7 +27,11 @@ void server_delete_client(int socket_fd_delete)
 	}
 	server.total_client--;
 	printf("\t||------------------Connected client deleted fd : [%d]--------------------||\n",socket_fd_delete);
-	close(socket_fd_delete);
+
+	delete_client_details(socket_fd_delete);       // Function call for providing the status of client deletion in the text file
+
+	close(socket_fd_delete);    // closing the socket_fd_delete
+}
 
 	// while (!feof(fptr)) 
     // {
@@ -65,4 +65,3 @@ void server_delete_client(int socket_fd_delete)
 		
 
 
-}
