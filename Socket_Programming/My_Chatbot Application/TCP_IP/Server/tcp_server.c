@@ -15,7 +15,7 @@
 #6: Client should communicate with the other connected clients whose data are stored in Server side of CLIENT_INFO.txt. And Client should have the flexibility to communicate with any connected client.
 */
 
-// Socket Programming Steps
+// Socket Programming Steps server
 //STEP 1 : creating a socket file descriptor
 //STEP 2 : binding the socket with port and IP
 //STEP 3 : listening to the client requests
