@@ -6,9 +6,9 @@ OBJ = server
 CFLAGS = -c -Wall
 
 all:		
-		$(CC) server_main.c server_socket.c server_select.c server_build_fdsets.c accept_connection.c connection_handler.c server_recv_from_client.c server_send_to_client.c process_recv_data.c find_the_client_index_by_name.c find_the_client_index_list.c cleanup.c server_delete_client.c  get_client_details.c   -o server
+		$(CC) server_main.c server_socket.c server_select.c server_build_fdsets.c accept_connection.c connection_handler.c server_recv_from_client.c server_send_to_client.c process_recv_data.c find_the_client_index_by_name.c find_the_client_index_list.c cleanup.c server_delete_client.c get_client_details.c delete_client_details.c -o server
 
-$(OBJ) :	server_main.o server_socket.o server_select.o server_build_fdsets.o accept_connection.o connection_handler.o server_recv_from_client.o server_send_to_client.o process_recv_data.o find_the_client_index_by_name.o find_the_client_index_list.o cleanup.o server_delete_client.o get_client_details.o   -o $(OBJ)
+$(OBJ) :	server_main.o server_socket.o server_select.o server_build_fdsets.o accept_connection.o connection_handler.o server_recv_from_client.o server_send_to_client.o process_recv_data.o find_the_client_index_by_name.o find_the_client_index_list.o cleanup.o server_delete_client.o get_client_details.o delete_client_details.o -o $(OBJ)
 
 server_main.o :		server_main.c
 		$(CC)	$(CFLAGS)	server_main.c
@@ -55,8 +55,11 @@ server_delete_client.o :		server_delete_client.c
 get_client_details.o :		get_client_details.c
 		$(CC)	$(CFLAGS)	get_client_details.c	
 
-# display.o :		display.c
-# 		$(CC)	$(CFLAGS)	display.c			
+delete_client_details.o :		delete_client_details.c
+		$(CC)	$(CFLAGS)	delete_client_details.c	
+
+#display.o :		display.c
+#		$(CC)	$(CFLAGS)	display.c			
 
 
 exec:		
