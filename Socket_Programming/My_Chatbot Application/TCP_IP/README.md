@@ -1,11 +1,11 @@
-MY_CHATBOT APPLICATION
+###MY_CHATBOT APPLICATION
 
 ********************************************************************************************************************************************************************
  TASK: TO CREATE A CHATBOT APPLICATION WHICH WILL COMMUNICATE BETWEEN TWO CLIENTS. BY DOING SO THE SERVER WILL STORE THE CLIENT DETAILS SUCH AS THE NAME, IP ADDRESS, PORT NUMBER AND FILE DESCRIPTOR IN A CLIENT_INFO.txt file.
 ********************************************************************************************************************************************************************
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-LIST OF OBJECTIVES
+###LIST OF OBJECTIVES
 
 #1:  Maintain the connected client details in server's data structure and store them in a text file.
 #2:  Respond to commands like LIST and CONNECT 
@@ -20,7 +20,7 @@ LIST OF OBJECTIVES
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-LIST OF OUTPUTS ON TERMINAL OF UBUNTU 18.04 LTS
+###LIST OF OUTPUTS ON TERMINAL OF UBUNTU 18.04 LTS
 
 #1 : SERVER SIDE CONNECTION
 
