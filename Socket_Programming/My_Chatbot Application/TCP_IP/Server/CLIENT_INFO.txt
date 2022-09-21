@@ -1,145 +1,28 @@
-||--The new connected client Mahadev information--||
-	1.Name = Mahadev
-	2.IP Address = 127.0.0.1
-	3.Port number = 33230
-	4.File descriptor = 4
-||--The new connected client Shambhu information--||
-	1.Name = Shambhu
-	2.IP Address = 127.0.0.1
-	3.Port number = 33232
-	4.File descriptor = 5
-||--The new connected client GI information--||
-	1.Name = GI
-	2.IP Address = 127.0.0.1
-	3.Port number = 37102
-	4.File descriptor = 6
 ||--The new connected client Alpha information--||
 	1.Name = Alpha
 	2.IP Address = 127.0.0.1
-	3.Port number = 34992
-	4.File descriptor = 7
+	3.Port number = 36680
+	4.File descriptor = 4
 ||--The new connected client Beta information--||
-	1.Name = Bravo
+	1.Name = Beta
 	2.IP Address = 127.0.0.1
-	3.Port number = 33178
-	4.File descriptor = 8
+	3.Port number = 53742
+	4.File descriptor = 5
 ||--The new connected client Gamma information--||
-	1.Name = Charlie
+	1.Name = Gamma
 	2.IP Address = 127.0.0.1
-	3.Port number = 36930
-	4.File descriptor = 9
-||--The new connected client Virat information--||
-	1.Name = Delta
-	2.IP Address = 127.0.0.1
-	3.Port number = 59918
-	4.File descriptor = 10
-||--The new connected client Dhoni information--||
-	1.Name = Echo
-	2.IP Address = 127.0.0.1
-	3.Port number = 41400
-	4.File descriptor = 11
-||--The new connected client Ronaldo information--||
-	1.Name = Foxtrot
-	2.IP Address = 127.0.0.1
-	3.Port number = 33454
-	4.File descriptor = 12
-||--The new connected client Messi information--||
-	1.Name = Golf
-	2.IP Address = 127.0.0.1
-	3.Port number = 55330
-	4.File descriptor = 13
-||--The new connected client A information--||
-	1.Name = A
-	2.IP Address = 127.0.0.1
-	3.Port number = 59892
-	4.File descriptor = 14
-||--The new connected client B information--||
-	1.Name = B
-	2.IP Address = 127.0.0.1
-	3.Port number = 37092
-	4.File descriptor = 15
-||--The new connected client C information--||
-	1.Name = C
-	2.IP Address = 127.0.0.1
-	3.Port number = 54752
-	4.File descriptor = 4
-||--The new connected client D information--||
-	1.Name = D
-	2.IP Address = 127.0.0.1
-	3.Port number = 54754
-	4.File descriptor = 5
-||--The new connected client E information--||
-	1.Name = E
-	2.IP Address = 127.0.0.1
-	3.Port number = 49110
+	3.Port number = 47400
 	4.File descriptor = 6
-||--The new connected client M information--||
-	1.Name = M
+||--The new connected client Eta information--||
+	1.Name = Eta
 	2.IP Address = 127.0.0.1
-	3.Port number = 32938
-	4.File descriptor = 4
-||--The new connected client N information--||
-	1.Name = N
+	3.Port number = 38186
+	4.File descriptor = 7
+||--The client with file descriptor 7 hs been deleted from the list--||
+||--The new connected client GI information--||
+	1.Name = GI
 	2.IP Address = 127.0.0.1
-	3.Port number = 35346
-	4.File descriptor = 5
-||--The new connected client O information--||
-	1.Name = O
-	2.IP Address = 127.0.0.1
-	3.Port number = 35348
-	4.File descriptor = 6
-||--The new connected client P information--||
-	1.Name = P
-	2.IP Address = 127.0.0.1
-	3.Port number = 55822
-	4.File descriptor = 4
-||--The new connected client Q information--||
-	1.Name = Q
-	2.IP Address = 127.0.0.1
-	3.Port number = 55236
-	4.File descriptor = 5
-||--The new connected client R information--||
-	1.Name = R
-	2.IP Address = 127.0.0.1
-	3.Port number = 55238
-	4.File descriptor = 6
-||--The new connected client S information--||
-	1.Name = S
-	2.IP Address = 127.0.0.1
-	3.Port number = 35186
-	4.File descriptor = 4
-||--The new connected client T information--||
-	1.Name = T
-	2.IP Address = 127.0.0.1
-	3.Port number = 59722
-	4.File descriptor = 5
-||--The new connected client U information--||
-	1.Name = U
-	2.IP Address = 127.0.0.1
-	3.Port number = 51426
-	4.File descriptor = 4
-||--The new connected client V information--||
-	1.Name = V
-	2.IP Address = 127.0.0.1
-	3.Port number = 42826
-	4.File descriptor = 5
-||--The new connected client W information--||
-	1.Name = W
-	2.IP Address = 127.0.0.1
-	3.Port number = 48352
-	4.File descriptor = 4
-||--The new connected client X information--||
-	1.Name = X
-	2.IP Address = 127.0.0.1
-	3.Port number = 48616
-	4.File descriptor = 5
-||--The new connected client Y information--||
-	1.Name = Y
-	2.IP Address = 127.0.0.1
-	3.Port number = 40058
-	4.File descriptor = 4
-||--The new connected client Z information--||
-	1.Name = Z
-	2.IP Address = 127.0.0.1
-	3.Port number = 40060
-	4.File descriptor = 5
+	3.Port number = 41390
+	4.File descriptor = 7
+||--The client with file descriptor 4 hs been deleted from the list--||
+||--The client with file descriptor 5 hs been deleted from the list--||
